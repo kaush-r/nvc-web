@@ -1,0 +1,2777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSBM Volunteer Club - University Club Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, 
+                rgba(236, 254, 255, 0.95) 0%, 
+                rgba(224, 242, 254, 0.9) 25%, 
+                rgba(220, 252, 231, 0.95) 50%, 
+                rgba(191, 219, 254, 0.9) 75%, 
+                rgba(240, 253, 250, 0.95) 100%);
+            min-height: 100vh;
+            color: #1f2937;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background Bubbles */
+        .bubble-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.25;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .bubble-1 {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #34d399, #60a5fa);
+            left: 10%;
+            top: 20%;
+        }
+
+        .bubble-2 {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #60a5fa, #34d399);
+            left: 85%;
+            top: 15%;
+        }
+
+        .bubble-3 {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(90deg, #34d399, #60a5fa);
+            left: 70%;
+            top: 60%;
+        }
+
+        .bubble-4 {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(225deg, #60a5fa, #34d399);
+            left: 5%;
+            top: 70%;
+        }
+
+        .bubble-5 {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(180deg, #34d399, #60a5fa);
+            left: 40%;
+            top: 10%;
+        }
+
+        .bubble-6 {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(315deg, #60a5fa, #34d399);
+            left: 60%;
+            top: 85%;
+        }
+
+        /* Animations */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                transform: scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1) rotate(180deg);
+                opacity: 1;
+            }
+        }
+
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .pulse-animation {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        /* Slide up animation for all elements */
+        .slide-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease-out;
+        }
+
+        .slide-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Glass effect */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            box-shadow: 0 12px 40px rgba(16, 185, 129, 0.2);
+            border-radius: 16px;
+        }
+
+        .glass-card-no-hover {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            box-shadow: 0 12px 40px rgba(16, 185, 129, 0.2);
+            border-radius: 16px;
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(45deg, #1e3a8a, #064e3b);
+            background-size: 200% 200%;
+            animation: gradientShift 4s ease infinite;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            background: transparent;
+            backdrop-filter: none;
+            border-bottom: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-left: -1rem;
+            margin-top: -0.5rem;
+        }
+
+        .logo-image {
+            height: 120px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+
+        .logo-image:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #059669, #1d4ed8);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            animation: pulse 2s ease-in-out infinite;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: bold;
+            line-height: 1;
+            margin-top: 0.25rem;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #111827;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #059669, #1d4ed8);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #059669;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta-button {
+            margin-left: 1.5rem;
+            padding: 0.6rem 1.25rem;
+            background: #1e3a8a;
+            color: white !important;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(30, 58, 138, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(30, 58, 138, 0.5);
+            background: #1e40af;
+            color: white !important;
+        }
+
+        .mobile-menu-btn {
+            display: block;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #374151;
+            cursor: pointer;
+        }
+
+        .mobile-nav {
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #d1d5db;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav .nav-cta-button {
+            margin-left: 0;
+            margin-top: 0.5rem;
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+            .mobile-menu-btn {
+                display: none;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 0;
+            position: relative;
+            background-image: 
+                linear-gradient(135deg, 
+                    rgba(236, 254, 255, 0.4) 0%, 
+                    rgba(224, 242, 254, 0.35) 25%, 
+                    rgba(220, 252, 231, 0.4) 50%, 
+                    rgba(191, 219, 254, 0.35) 75%, 
+                    rgba(240, 253, 250, 0.4) 100%),
+                url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2139&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.6rem, 6vw, 3rem);
+            font-weight: bold;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+        
+        .hero .subtitle {
+            font-size: clamp(1.4rem, 5vw, 2.2rem);
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            line-height: 1.2;
+            text-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+            letter-spacing: 0.8px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: #374151;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: clamp(2.2rem, 7vw, 4rem);
+            }
+            .hero .subtitle {
+                font-size: clamp(1.8rem, 5.5vw, 3rem);
+                text-shadow: 0 6px 25px rgba(16, 185, 129, 0.5);
+                letter-spacing: 1px;
+            }
+            .hero p {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            line-height: 1.2;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #059669, #1d4ed8);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #059669;
+            border: 2px solid #059669;
+        }
+
+        .btn-secondary:hover {
+            background: #059669;
+            color: white;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: #374151;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        /* Grid layouts */
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .grid-cols-1 {
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .grid-cols-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .grid-cols-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media (max-width: 768px) {
+            .grid-cols-2,
+            .grid-cols-3,
+            .grid-cols-4 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .grid-cols-3,
+            .grid-cols-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Cards */
+        .card {
+            padding: 2rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(16, 185, 129, 0.25);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(16, 185, 129, 0.5);
+            box-shadow: 0 20px 45px rgba(16, 185, 129, 0.3);
+        }
+
+        .team-member {
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-member:hover {
+            transform: translateY(-8px) scale(1.03);
+        }
+
+        .team-member:hover .member-image {
+            transform: scale(1.1) rotateY(5deg);
+            box-shadow: 0 15px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(16, 185, 129, 0.1), transparent);
+            transition: left 0.6s ease;
+            z-index: 1;
+        }
+
+        .team-member:hover::before {
+            left: 100%;
+        }
+
+        .member-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: linear-gradient(45deg, #059669, #1d4ed8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2;
+            border: 3px solid transparent;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        .member-image:hover {
+            border-color: rgba(16, 185, 129, 0.5);
+        }
+
+        .member-name {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-role {
+            background: rgba(5, 118, 105, 0.15);
+            color: #047857;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .member-bio {
+            color: #374151;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #047857;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #374151;
+            font-weight: 600;
+        }
+
+        /* Add achievement item hover effects */
+        .achievement-item {
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .achievement-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .achievement-item:hover .contact-icon {
+            transform: scale(1.2) rotate(10deg);
+            color: #059669;
+            transition: all 0.3s ease;
+        }
+
+        /* Stats styling without hover effects */
+        .stat {
+            text-align: center;
+        }
+
+        /* Events and Gallery */
+        .event-card,
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .event-card:hover,
+        .gallery-item:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(16, 185, 129, 0.3);
+        }
+
+        .event-card::before,
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .event-card:hover::before,
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .event-image,
+        .gallery-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #10b981, #3b82f6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .event-card:hover .event-image,
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.1);
+        }
+
+        .event-card:hover .event-image i,
+        .gallery-item:hover .gallery-image i {
+            transform: rotateY(180deg) scale(1.2);
+            transition: transform 0.6s ease;
+        }
+
+        .event-content {
+            padding: 1.5rem;
+        }
+
+        .event-date {
+            color: #10b981;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .event-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+        }
+
+        .event-description {
+            color: #4b5563;
+            line-height: 1.5;
+        }
+
+        /* Blog */
+        .blog-filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            border: 1px solid #d1d5db;
+            background: rgba(255, 255, 255, 0.7);
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #10b981, #3b82f6);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .filter-btn:hover::before {
+            left: 0;
+        }
+
+        .filter-btn:hover {
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(45deg, #10b981, #3b82f6);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .blog-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(16, 185, 129, 0.25);
+        }
+
+        .blog-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(59, 130, 246, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .blog-card:hover::after {
+            opacity: 1;
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #10b981, #3b82f6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .blog-card:hover .blog-image {
+            transform: scale(1.08);
+        }
+
+        .blog-card:hover .blog-image i {
+            transform: rotate(360deg) scale(1.3);
+            transition: transform 0.8s ease;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .blog-card:hover .blog-content {
+            transform: translateY(-5px);
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 0.5rem;
+            color: #4b5563;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .blog-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+        }
+
+        .blog-excerpt {
+            color: #4b5563;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .blog-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+            padding: 0.25rem 0.5rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Testimonials */
+        .testimonial-card {
+            position: relative;
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.25);
+        }
+
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(16, 185, 129, 0.05), rgba(59, 130, 246, 0.05));
+            transition: left 0.6s ease;
+            z-index: 1;
+        }
+
+        .testimonial-card:hover::before {
+            left: 100%;
+        }
+
+        .testimonial-content {
+            position: relative;
+            z-index: 2;
+            padding: 1.5rem;
+        }
+
+        .quote-icon {
+            color: #059669;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #374151;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #059669, #1d4ed8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .author-info {
+            flex-grow: 1;
+        }
+
+        .author-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-role {
+            font-size: 0.875rem;
+            color: #059669;
+            font-weight: 500;
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-info {
+            padding: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-icon {
+            color: #047857;
+            font-size: 1.25rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .social-link img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .social-link:hover::before {
+            transform: scale(1);
+        }
+
+        .social-link:hover {
+            transform: scale(1.2);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.5);
+        }
+
+        .contact-form {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: border-color 0.3s;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        select.form-input {
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.9);
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1rem;
+            padding-right: 2.5rem;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            color: #374151;
+        }
+
+        select.form-input:focus {
+            background-color: rgba(255, 255, 255, 0.95);
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310b981' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+        }
+
+        select.form-input option {
+            background: white;
+            color: #1f2937;
+            padding: 0.5rem;
+        }
+
+        select.form-input option:first-child {
+            color: #9ca3af;
+        }
+
+        /* Placeholder styling for select */
+        select.form-input:invalid {
+            color: #9ca3af;
+        }
+
+        /* Testimonial Submission Section */
+        .testimonial-submission-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1024px) {
+            .testimonial-submission-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .testimonial-form-container {
+            padding: 2.5rem;
+        }
+
+        .testimonial-form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-form-icon {
+            font-size: 3rem;
+            color: #059669;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .testimonial-form-description {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .testimonial-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .character-count {
+            text-align: right;
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+
+        /* Star Rating */
+        .rating-container {
+            margin-bottom: 0.5rem;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .star {
+            font-size: 1.5rem;
+            color: #d1d5db;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .star:hover,
+        .star.active {
+            color: #fbbf24;
+            transform: scale(1.1);
+        }
+
+        .star.hover {
+            color: #fbbf24;
+        }
+
+        .rating-text {
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        /* Checkbox styling */
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .form-checkbox {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+            accent-color: #059669;
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+
+        .checkbox-label {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #4b5563;
+            cursor: pointer;
+            font-weight: normal;
+        }
+
+        .testimonial-submit-btn {
+            width: auto;
+            min-width: 180px;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            margin-top: 1rem;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Form Messages */
+        .form-message {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .success-message {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid #10b981;
+            color: #059669;
+        }
+
+        .success-message i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .success-message h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid #ef4444;
+            color: #dc2626;
+        }
+
+        .error-message i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .error-message h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Guidelines Panel */
+        .testimonial-guidelines {
+            padding: 2rem;
+            height: fit-content;
+        }
+
+        .guidelines-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #059669;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .guideline-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .guideline-icon {
+            color: #059669;
+            font-size: 1.25rem;
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        .guideline-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.25rem;
+        }
+
+        .guideline-item p {
+            font-size: 0.9rem;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        .testimonial-examples {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .testimonial-examples h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .testimonial-examples ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .testimonial-examples li {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .testimonial-examples li::before {
+            content: "•";
+            color: #059669;
+            font-weight: bold;
+            position: absolute;
+            left: 0.5rem;
+        }
+
+        #submitBtn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        #submitBtn:disabled:hover {
+            background: linear-gradient(45deg, #10b981, #3b82f6);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f3460 100%);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 3rem 0 1rem;
+            color: #e2e8f0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .footer-links a:hover {
+            color: #10b981;
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        /* Utility classes */
+        .text-center { text-align: center; }
+        .mb-1 { margin-bottom: 0.25rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-3 { margin-bottom: 0.75rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mt-8 { margin-top: 2rem; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <!-- Static Background Bubbles -->
+    <div class="bubble-container">
+        <div class="bubble bubble-1"></div>
+        <div class="bubble bubble-2"></div>
+        <div class="bubble bubble-3"></div>
+        <div class="bubble bubble-4"></div>
+        <div class="bubble bubble-5"></div>
+        <div class="bubble bubble-6"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <img src="https://i.ibb.co/1f4ZQH27/Untitled-design.png" alt="NSBM Volunteer Club Logo" class="logo-image">
+                </div>
+                
+                <nav class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#events">Events</a>
+                    <a href="#gallery">Gallery</a>
+                    <a href="#testimonials">Testimonials</a>
+                    <a href="#submit-testimonial" class="nav-cta-button">
+                        Contribute
+                    </a>
+                </nav>
+
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <nav class="mobile-nav" id="mobileNav">
+                <a href="#about" onclick="toggleMobileMenu()">About</a>
+                <a href="#events" onclick="toggleMobileMenu()">Events</a>
+                <a href="#gallery" onclick="toggleMobileMenu()">Gallery</a>
+                <a href="#testimonials" onclick="toggleMobileMenu()">Testimonials</a>
+                <a href="#submit-testimonial" class="nav-cta-button" onclick="toggleMobileMenu()">
+                    Contribute
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="gradient-text floating-animation">WORK FOR A CAUSE. NOT FOR APPLAUSE</h1>
+            <p>We are the Volunteer Club of NSBM Green University. Together, we're building a better tomorrow through innovation and compassion.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">
+                    Contact Us <i class="fas fa-chevron-right"></i>
+                </a>
+                <a href="#about" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section slide-up">
+        <div class="container">
+            <h2 class="section-title gradient-text">About Us</h2>
+            <div class="glass-card-no-hover card slide-up">
+                <p class="mb-6">Founded in 2020, TechVolunteers is more than just a student organization—we're a movement. We bridge the gap between cutting-edge technology and meaningful community service, empowering students to create lasting positive impact.</p>
+                <p class="mb-8">Our diverse community of 200+ members includes students from Computer Science, Business, Communications, and beyond. Together, we tackle real-world challenges through innovative solutions and dedicated volunteer work.</p>
+                
+                <div class="stats">
+                    <div class="stat slide-up">
+                        <div class="stat-number">200+</div>
+                        <div class="stat-label">Active Members</div>
+                    </div>
+                    <div class="stat slide-up">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Volunteer Hours</div>
+                    </div>
+                    <div class="stat slide-up">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="section slide-up">
+        <div class="container">
+            <h2 class="section-title gradient-text">Meet The Leadership Behind Every Step</h2>
+            <p class="section-subtitle">Meet the passionate leaders driving our mission forward</p>
+            
+            <div class="grid grid-cols-4">
+                <div class="team-member glass-card card slide-up">
+                    <div class="member-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="member-name">Alex Chen</h3>
+                    <span class="member-role">President</span>
+                    <p class="member-bio">Computer Science major passionate about community service and technology innovation.</p>
+                </div>
+                
+                <div class="team-member glass-card card slide-up">
+                    <div class="member-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="member-name">Sarah Johnson</h3>
+                    <span class="member-role">Vice President</span>
+                    <p class="member-bio">Business Administration student with expertise in event planning and team coordination.</p>
+                </div>
+                
+                <div class="team-member glass-card card slide-up">
+                    <div class="member-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="member-name">Marcus Rodriguez</h3>
+                    <span class="member-role">Secretary</span>
+                    <p class="member-bio">Communications major focused on outreach and community engagement initiatives.</p>
+                </div>
+                
+                <div class="team-member glass-card card slide-up">
+                    <div class="member-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="member-name">Emily Zhang</h3>
+                    <span class="member-role">Treasurer</span>
+                    <p class="member-bio">Finance student ensuring transparent and effective resource management.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="section slide-up">
+        <div class="container">
+            <h2 class="section-title gradient-text">Our Achievements</h2>
+            <p class="section-subtitle">Celebrating milestones that showcase our commitment to excellence</p>
+            
+            <div class="grid grid-cols-2">
+                <div class="glass-card card slide-up">
+                    <div class="achievement-item">
+                        <i class="fas fa-trophy contact-icon mb-3"></i>
+                        <h3 class="member-name">Community Impact Award</h3>
+                        <span class="member-role">2024</span>
+                        <p class="member-bio">Recognized for outstanding volunteer service with 500+ hours contributed</p>
+                    </div>
+                </div>
+                
+                <div class="glass-card card slide-up">
+                    <div class="achievement-item">
+                        <i class="fas fa-users contact-icon mb-3"></i>
+                        <h3 class="member-name">Largest Student Organization</h3>
+                        <span class="member-role">2023</span>
+                        <p class="member-bio">Grew membership to 200+ active volunteers across campus</p>
+                    </div>
+                </div>
+                
+                <div class="glass-card card slide-up">
+                    <div class="achievement-item">
+                        <i class="fas fa-award contact-icon mb-3"></i>
+                        <h3 class="member-name">Innovation in Service</h3>
+                        <span class="member-role">2023</span>
+                        <p class="member-bio">Pioneered tech-driven solutions for local community challenges</p>
+                    </div>
+                </div>
+                
+                <div class="glass-card card slide-up">
+                    <div class="achievement-item">
+                        <i class="fas fa-heart contact-icon mb-3"></i>
+                        <h3 class="member-name">Charity Fundraising</h3>
+                        <span class="member-role">2024</span>
+                        <p class="member-bio">Raised $50,000+ for local charities and community programs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="section slide-up">
+        <div class="container">
+            <h2 class="section-title gradient-text">Upcoming Events</h2>
+            <p class="section-subtitle">Join us in making a difference through these exciting initiatives</p>
+            
+            <div class="grid grid-cols-3">
+                <div class="event-card glass-card slide-up">
+                    <div class="event-image">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="fas fa-calendar"></i> March 15, 2024
+                        </div>
+                        <h3 class="event-title">Tech for Good Hackathon</h3>
+                        <p class="event-description">48-hour hackathon focused on creating solutions for social impact</p>
+                    </div>
+                </div>
+                
+                <div class="event-card glass-card slide-up">
+                    <div class="event-image">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="fas fa-calendar"></i> April 22, 2024
+                        </div>
+                        <h3 class="event-title">Community Clean-up Drive</h3>
+                        <p class="event-description">Earth Day initiative to clean local parks and waterways</p>
+                    </div>
+                </div>
+                
+                <div class="event-card glass-card slide-up">
+                    <div class="event-image">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="fas fa-calendar"></i> May 10, 2024
+                        </div>
+                        <h3 class="event-title">Digital Literacy Workshop</h3>
+                        <p class="event-description">Teaching seniors basic computer skills and internet safety</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Events & Updates Section -->
+    <section id="latest-events" class="section slide-up">
+        <div class="container">
+            <h2 class="section-title gradient-text">Latest Events & Updates</h2>
+            <p class="section-subtitle">Stay updated with our latest achievements, events, and community impact stories</p>
+            
+            <div class="blog-filters">
+                <button class="filter-btn active" onclick="filterPosts('All')">All</button>
+                <button class="filter-btn" onclick="filterPosts('Awards')">Awards</button>
+                <button class="filter-btn" onclick="filterPosts('Community')">Community</button>
+                <button class="filter-btn" onclick="filterPosts('Events')">Events</button>
+                <button class="filter-btn" onclick="filterPosts('Partnerships')">Partnerships</button>
+                <button class="filter-btn" onclick="filterPosts('Member Spotlight')">Member Spotlight</button>
+            </div>
+            
+            <div class="grid grid-cols-3" id="blogGrid">
+                <div class="blog-card glass-card slide-up" data-category="Awards">
+                    <div class="blog-image">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>Alex Chen</span> • <span>March 10, 2024</span> • <span>3 min read</span>
+                        </div>
+                        <h3 class="blog-title">TechVolunteers Wins University Innovation Award</h3>
+                        <p class="blog-excerpt">Our organization has been recognized for outstanding innovation in community service technology solutions.</p>
+                        <div class="blog-tags">
+                            <span class="tag">#Innovation</span>
+                            <span class="tag">#Community</span>
+                            <span class="tag">#Technology</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="openBlogModal('blog1')">Read More</button>
+                    </div>
+                </div>
+                
+                <div class="blog-card glass-card slide-up" data-category="Community">
+                    <div class="blog-image">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>Sarah Johnson</span> • <span>February 28, 2024</span> • <span>4 min read</span>
+                        </div>
+                        <h3 class="blog-title">Successful Digital Literacy Workshop Series Concludes</h3>
+                        <p class="blog-excerpt">Over 200 community members gained essential digital skills through our comprehensive workshop program.</p>
+                        <div class="blog-tags">
+                            <span class="tag">#Education</span>
+                            <span class="tag">#Digital Literacy</span>
+                            <span class="tag">#Workshops</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="openBlogModal('blog2')">Read More</button>
+                    </div>
+                </div>
+                
+                <div class="blog-card glass-card slide-up" data-category="Events">
+                    <div class="blog-image">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>Marcus Rodriguez</span> • <span>March 5, 2024</span> • <span>2 min read</span>
+                        </div>
+                        <h3 class="blog-title">Announcing Our Spring 2024 Hackathon: 'Code for Change'</h3>
+                        <p class="blog-excerpt">Join us for a 48-hour hackathon focused on creating technology solutions for social impact.</p>
+                        <div class="blog-tags">
+                            <span class="tag">#Hackathon</span>
+                            <span class="tag">#Technology</span>
+                            <span class="tag">#Social Impact</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="openBlogModal('blog3')">Read More</button>
+                    </div>
+                </div>
+                
+                <div class="blog-card glass-card slide-up" data-category="Partnerships">
+                    <div class="blog-image">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>Emily Zhang</span> • <span>February 15, 2024</span> • <span>5 min read</span>
+                        </div>
+                        <h3 class="blog-title">Partnership with Local Food Bank Launches Tech Initiative</h3>
+                        <p class="blog-excerpt">Our new partnership introduces inventory management system to streamline food distribution.</p>
+                        <div class="blog-tags">
+                            <span class="tag">#Partnership</span>
+                            <span class="tag">#Food Security</span>
+                            <span class="tag">#Software Development</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="openBlogModal('blog4')">Read More</button>
+                    </div>
+                </div>
+                
+                <div class="blog-card glass-card slide-up" data-category="Member Spotlight">
+                    <div class="blog-image">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>Alex Chen</span> • <span>March 1, 2024</span> • <span>4 min read</span>
+                        </div>
+                        <h3 class="blog-title">Member Spotlight: Building Apps for Accessibility</h3>
+                        <p class="blog-excerpt">Meet Jessica Liu, whose innovative accessibility app is making campus more inclusive for students with disabilities.</p>
+                        <div class="blog-tags">
+                            <span class="tag">#Accessibility</span>
+                            <span class="tag">#Innovation</span>
+                            <span class="tag">#Student Success</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="openBlogModal('blog5')">Read More</button>
+                    </div>
+                </div>
+                
+                <div class="blog-card glass-card slide-up" data-category="Community">
+                    <div class="blog-image">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>Sarah Johnson</span> • <span>February 20, 2024</span> • <span>3 min read</span>
+                        </div>
+                        <h3 class="blog-title">Fundraising Success: $15K Raised for Local STEM Education</h3>
+                        <p class="blog-excerpt">Our annual fundraising campaign exceeded goals, supporting STEM programs in underserved schools.</p>
+                        <div class="blog-tags">
+                            <span class="tag">#Fundraising</span>
+                            <span class="tag">#STEM Education</span>
+                            <span class="tag">#Community Impact</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="openBlogModal('blog6')">Read More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="section slide-up">
+        <div class="container">
+            <h2 class="section-title gradient-text">Gallery</h2>
+            <p class="section-subtitle">Moments that capture our journey and impact</p>
+            
+            <div class="grid grid-cols-4">
+                <div class="gallery-item slide-up" onclick="openModal('modal1')">
+                    <div class="gallery-image">
+                        <i class="fas fa-image"></i>
+                    </div>
+                </div>
+                <div class="gallery-item slide-up" onclick="openModal('modal2')">
+                    <div class="gallery-image">
+                        <i class="fas fa-image"></i>
+                    </div>
+                </div>
+                <div class="gallery-item slide-up" onclick="openModal('modal3')">
+                    <div class="gallery-image">
+                        <i class="fas fa-image"></i>
+                    </div>
+                </div>
+                <div class="gallery-item slide-up" onclick="openModal('modal4')">
+                    <div class="gallery-image">
+                        <i class="fas fa-image"></i>
+                    </div>
+                </div>
+                <div class="gallery-item slide-up" onclick="openModal('modal5')">
+                    <div class="gallery-image">
+                        <i class="fas fa-image"></i>
+                    </div>
+                </div>
+                <div class="gallery-item slide-up" onclick="openModal('modal6')">
+                    <div class="gallery-image">
+                        <i class="fas fa-image"></i>
+                    </div>
+                </div>
+                <div class="gallery-item slide-up" onclick="openModal('modal7')">
+                    <div class="gallery-image">
+                        <i class="fas fa-image"></i>
+                    </div>
+                </div>
+                <div class="gallery-item slide-up" onclick="openModal('modal8')">
+                    <div class="gallery-image">
+                        <i class="fas fa-image"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section slide-up">
+        <div class="container">
+            <h2 class="section-title gradient-text">What People Say About Us</h2>
+            <p class="section-subtitle">Hear from our community members, partners, and those we've helped along the way</p>
+            
+            <div class="grid grid-cols-3">
+                <div class="testimonial-card glass-card card slide-up">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="testimonial-text">"The NSBM Volunteer Club has been instrumental in transforming our community. Their digital literacy workshops helped over 50 seniors in our neighborhood become comfortable with technology. Their dedication is truly inspiring."</p>
+                        <div class="testimonial-author">
+                            <div class="author-image">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4 class="author-name">Maria Rodriguez</h4>
+                                <span class="author-role">Community Center Director</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card glass-card card slide-up">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="testimonial-text">"Working with the volunteers has been an incredible experience. They developed a food distribution system that increased our efficiency by 40%. These students are not just volunteers, they're innovators."</p>
+                        <div class="testimonial-author">
+                            <div class="author-image">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4 class="author-name">David Chen</h4>
+                                <span class="author-role">Food Bank Manager</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card glass-card card slide-up">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="testimonial-text">"Joining the Volunteer Club was the best decision I made at university. It gave me practical experience, lifelong friendships, and a sense of purpose. The skills I gained here landed me my dream job."</p>
+                        <div class="testimonial-author">
+                            <div class="author-image">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4 class="author-name">Priya Sharma</h4>
+                                <span class="author-role">Alumni, Software Engineer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card glass-card card slide-up">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="testimonial-text">"The environmental clean-up drives organized by these students have made a visible difference in our local parks. Their commitment to sustainability and community welfare is commendable."</p>
+                        <div class="testimonial-author">
+                            <div class="author-image">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4 class="author-name">Dr. Rajesh Kumar</h4>
+                                <span class="author-role">Environmental Scientist</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card glass-card card slide-up">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="testimonial-text">"As a university professor, I'm impressed by the leadership and initiative shown by the Volunteer Club members. They've created a model that other institutions should follow."</p>
+                        <div class="testimonial-author">
+                            <div class="author-image">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4 class="author-name">Prof. Sarah Williams</h4>
+                                <span class="author-role">Computer Science Department</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card glass-card card slide-up">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="testimonial-text">"The accessibility app developed by the club members has been a game-changer for students with disabilities on our campus. Their inclusive approach to technology is remarkable."</p>
+                        <div class="testimonial-author">
+                            <div class="author-image">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4 class="author-name">Michael Thompson</h4>
+                                <span class="author-role">Disability Services Coordinator</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Submit Testimonial Section -->
+    <section id="submit-testimonial" class="section slide-up" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(59, 130, 246, 0.05)); padding: 6rem 0;">
+        <div class="container">
+            <h2 class="section-title gradient-text">Share Your Experience</h2>
+            <p class="section-subtitle">Help others learn about our impact by sharing your testimonial. Your story matters and inspires us to do better!</p>
+            
+            <div class="testimonial-submission-grid">
+                <div class="testimonial-form-container glass-card slide-up">
+                    <div class="testimonial-form-header">
+                        <i class="fas fa-star testimonial-form-icon"></i>
+                        <h3 class="mb-4">Share Your Experience With Us</h3>
+                        <p class="testimonial-form-description">Share how the NSBM Volunteer Club has impacted you, your community, or your organization. Your feedback helps us improve and motivates others to join our mission.</p>
+                    </div>
+                    
+                    <form id="testimonialForm" action="https://formspree.io/f/movlawqq" method="POST" class="testimonial-form">
+                        <div class="form-group">
+                            <label for="testimonial-name" class="form-label">Your Name *</label>
+                            <input type="text" id="testimonial-name" name="testimonial_name" class="form-input" placeholder="Enter your full name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="testimonial-role" class="form-label">Your Role/Title *</label>
+                            <input type="text" id="testimonial-role" name="testimonial_role" class="form-input" placeholder="e.g., Student, Community Member, Partner Organization" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="testimonial-email" class="form-label">Email Address *</label>
+                            <input type="email" id="testimonial-email" name="testimonial_email" class="form-input" placeholder="your.email@example.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="testimonial-organization" class="form-label">Organization (Optional)</label>
+                            <input type="text" id="testimonial-organization" name="testimonial_organization" class="form-input" placeholder="Your company, school, or organization">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="testimonial-category" class="form-label">Experience Category *</label>
+                            <select id="testimonial-category" name="testimonial_category" class="form-input" required>
+                                <option value="" disabled selected>Select your experience type</option>
+                                <option value="volunteer">As a Volunteer Member</option>
+                                <option value="community">Community Impact</option>
+                                <option value="partnership">Partnership/Collaboration</option>
+                                <option value="event">Event Participation</option>
+                                <option value="service">Received Services</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="testimonial-rating" class="form-label">Overall Experience Rating *</label>
+                            <div class="rating-container">
+                                <div class="star-rating" id="starRating">
+                                    <span class="star" data-rating="1">★</span>
+                                    <span class="star" data-rating="2">★</span>
+                                    <span class="star" data-rating="3">★</span>
+                                    <span class="star" data-rating="4">★</span>
+                                    <span class="star" data-rating="5">★</span>
+                                </div>
+                                <input type="hidden" id="testimonial-rating" name="testimonial_rating" required>
+                                <span class="rating-text" id="ratingText">Please select a rating</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="testimonial-text" class="form-label">Your Testimonial *</label>
+                            <textarea id="testimonial-text" name="testimonial_text" class="form-textarea testimonial-textarea" placeholder="Share your experience with the NSBM Volunteer Club. How did we impact you or your community? What would you tell others about us?" required></textarea>
+                            <div class="character-count">
+                                <span id="charCount">0</span>/500 characters
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="testimonial-consent" name="testimonial_consent" class="form-checkbox">
+                                <label for="testimonial-consent" class="checkbox-label"><b>
+                                    I consent to having my testimonial published on the NSBM Volunteer Club website. I understand that my submission will be reviewed before publication.</b>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Hidden fields for form processing -->
+                        <input type="hidden" name="_subject" value="New Testimonial Submission - NSBM Volunteer Club">
+                        <input type="hidden" name="form_type" value="testimonial">
+                        <input type="hidden" name="_captcha" value="false">
+                        
+                        <button type="submit" class="btn btn-primary testimonial-submit-btn" id="testimonialSubmitBtn">
+                            <span id="testimonialSubmitText">
+                                <i class="fas fa-paper-plane"></i> Submit
+                            </span>
+                            <span id="testimonialLoadingText" class="hidden">
+                                <i class="fas fa-spinner fa-spin"></i> Submitting...
+                            </span>
+                        </button>
+                    </form>
+                    
+                    <!-- Success/Error Messages -->
+                    <div id="testimonialSuccess" class="hidden form-message success-message">
+                        <i class="fas fa-check-circle"></i>
+                        <h4>Thank You!</h4>
+                        <p>Your testimonial has been submitted successfully. We'll review it and get back to you soon. Thank you for sharing your experience!</p>
+                    </div>
+                    
+                    <div id="testimonialError" class="hidden form-message error-message">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <h4>Submission Error</h4>
+                        <p>Sorry, there was an error submitting your testimonial. Please try again or contact us directly.</p>
+                    </div>
+                </div>
+                
+                <div class="testimonial-guidelines glass-card slide-up">
+                    <h3 class="guidelines-title">
+                        <i class="fas fa-lightbulb"></i>
+                        Testimonial Guidelines
+                    </h3>
+                    
+                    <div class="guideline-item">
+                        <i class="fas fa-check-circle guideline-icon"></i>
+                        <div>
+                            <h4>Be Specific</h4>
+                            <p>Share specific examples of how we helped you or your community</p>
+                        </div>
+                    </div>
+                    
+                    <div class="guideline-item">
+                        <i class="fas fa-heart guideline-icon"></i>
+                        <div>
+                            <h4>Be Authentic</h4>
+                            <p>Write in your own voice and share your genuine experience</p>
+                        </div>
+                    </div>
+                    
+                    <div class="guideline-item">
+                        <i class="fas fa-users guideline-icon"></i>
+                        <div>
+                            <h4>Include Impact</h4>
+                            <p>Mention how our work affected you, your organization, or community</p>
+                        </div>
+                    </div>
+                    
+                    <div class="guideline-item">
+                        <i class="fas fa-star guideline-icon"></i>
+                        <div>
+                            <h4>Keep it Positive</h4>
+                            <p>Focus on positive experiences and outcomes</p>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-examples">
+                        <h4><i class="fas fa-quote-left"></i> Example Topics</h4>
+                        <ul>
+                            <li>How our digital literacy workshops helped you</li>
+                            <li>Impact of our community service projects</li>
+                            <li>Your experience as a volunteer member</li>
+                            <li>Collaboration outcomes with your organization</li>
+                            <li>Personal growth through our programs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section slide-up">
+        <div class="container">
+            <h2 class="section-title gradient-text">Get In Touch</h2>
+            <p class="section-subtitle">Ready to join our mission? We'd love to hear from you</p>
+            
+            <div style="display: flex; justify-content: center; width: 100%;">
+                <div class="contact-form glass-card slide-up" style="max-width: 600px; width: 100%;">
+                    <h3 class="mb-6">Send us a Message</h3>
+                    <form id="contactForm" action="https://formspree.io/f/mgvzwywa" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-input" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-input" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" name="phone" class="form-input" placeholder="Your Phone (Optional)">
+                        </div>
+                        <div class="form-group">
+                            <select name="inquiry_type" class="form-input" required>
+                                <option value="" disabled selected>Select Inquiry Type</option>
+                                <option value="membership">Membership Inquiry</option>
+                                <option value="volunteer">Volunteer Opportunity</option>
+                                <option value="partnership">Partnership</option>
+                                <option value="event">Event Information</option>
+                                <option value="general">General Question</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" class="form-textarea" placeholder="Your Message" required></textarea>
+                        </div>
+                        <!-- Hidden fields for better data tracking -->
+                        <input type="hidden" name="_subject" value="New Contact Form Submission - NSBM Volunteer Club">
+                        <input type="hidden" name="_next" value="thank-you.html">
+                        <input type="hidden" name="_captcha" value="false">
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.8rem 1.5rem; font-size: 1rem;" id="submitBtn">
+                            <span id="submitText">Send Message</span>
+                            <span id="loadingText" class="hidden">Sending...</span>
+                        </button>
+                    </form>
+                    
+                    <!-- Success/Error Messages -->
+                    <div id="formSuccess" class="hidden" style="margin-top: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; border-radius: 8px; color: #059669;">
+                        <i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully. We'll get back to you soon.
+                    </div>
+                    
+                    <div id="formError" class="hidden" style="margin-top: 1rem; padding: 1rem; background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; border-radius: 8px; color: #dc2626;">
+                        <i class="fas fa-exclamation-circle"></i> Sorry, there was an error sending your message. Please try again or contact us directly.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <div class="logo mb-4">
+                        <div class="logo-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <span class="logo-text gradient-text">NSBM Volunteer Club</span>
+                    </div>
+                    <p>Empowering students to create positive impact through technology and community service.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#events">Events</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook" style="filter: invert(0);">
+                        </a>
+                        <a href="#" class="social-link">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" style="filter: invert(0);">
+                        </a>
+                        <a href="#" class="social-link">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" style="filter: invert(0);">
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <span>info@nsbmvolunteersclub.org</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone contact-icon"></i>
+                        <span>+94 771234567</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt contact-icon"></i>
+                        <span>NSBM Volunteer Club,<br>2nd Floor Student Center,<br>NSBM Green University,<br>Pitipana, Homagama,<br>Sri Lanka.</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 NSBM Volunteers Club. All rights reserved. Made with ❤️ by students, for students.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('imageModal')">&times;</button>
+            <div id="modalImageContent"></div>
+        </div>
+    </div>
+
+    <div id="blogModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('blogModal')">&times;</button>
+            <div id="modalBlogContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('active');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Blog filtering
+        function filterPosts(category) {
+            const posts = document.querySelectorAll('.blog-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // Update active button
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter posts
+            posts.forEach(post => {
+                if (category === 'All' || post.dataset.category === category) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        }
+
+        // Modal functions
+        function openModal(modalId) {
+            const modal = document.getElementById('imageModal');
+            const content = document.getElementById('modalImageContent');
+            content.innerHTML = `
+                <div class="gallery-image" style="height: 400px; font-size: 4rem;">
+                    <i class="fas fa-image"></i>
+                </div>
+                <p class="text-center mt-4">Gallery Image Preview</p>
+            `;
+            modal.classList.add('active');
+        }
+
+        function openBlogModal(blogId) {
+            const modal = document.getElementById('blogModal');
+            const content = document.getElementById('modalBlogContent');
+            
+            const blogContent = {
+                'blog1': {
+                    title: 'TechVolunteers Wins University Innovation Award',
+                    content: 'We are thrilled to announce that TechVolunteers has been awarded the prestigious University Innovation Award for 2024. This recognition comes after our successful implementation of the "Digital Bridge" project, which connected over 500 senior citizens with essential digital literacy skills. The project utilized a custom-built learning management system developed entirely by our student volunteers, featuring adaptive learning paths and multilingual support.'
+                },
+                'blog2': {
+                    title: 'Successful Digital Literacy Workshop Series Concludes',
+                    content: 'Our six-month Digital Literacy Workshop Series has successfully concluded, marking a significant milestone in our community outreach efforts. The program, which ran from September 2023 to February 2024, provided comprehensive digital skills training to over 200 community members, primarily focusing on seniors and underserved populations.'
+                },
+                'blog3': {
+                    title: 'Announcing Our Spring 2024 Hackathon: Code for Change',
+                    content: 'We are excited to announce our upcoming Spring 2024 Hackathon: "Code for Change", scheduled for April 12-14, 2024. This 48-hour intensive event will bring together students, professionals, and community leaders to develop innovative technology solutions addressing local social challenges.'
+                },
+                'blog4': {
+                    title: 'Partnership with Local Food Bank Launches Tech Initiative',
+                    content: 'TechVolunteers is proud to announce our new partnership with the Metro Community Food Bank, launching an innovative technology initiative to revolutionize food distribution efficiency. Our team of computer science and business students has developed a comprehensive inventory management system that tracks food donations, manages expiration dates, and optimizes distribution routes.'
+                },
+                'blog5': {
+                    title: 'Member Spotlight: Building Apps for Accessibility',
+                    content: 'This month, we are highlighting Jessica Liu, a junior Computer Science major whose passion for accessibility has led to the development of "CampusNavigate", an innovative mobile app designed to make our university more accessible for students with disabilities. Jessica joined TechVolunteers in her freshman year and quickly became involved in our accessibility initiatives.'
+                },
+                'blog6': {
+                    title: 'Fundraising Success: $15K Raised for Local STEM Education',
+                    content: 'We are thrilled to report that our annual "Tech for Tomorrow" fundraising campaign has exceeded all expectations, raising $15,000 for STEM education programs in underserved local schools. The campaign, which ran throughout February, included various activities such as a charity gaming tournament, tech skill workshops with donation-based admission, and a crowdfunding initiative supported by our alumni network.'
+                }
+            };
+            
+            const blog = blogContent[blogId];
+            content.innerHTML = `
+                <h2 class="gradient-text mb-4">${blog.title}</h2>
+                <p class="mb-4" style="line-height: 1.6;">${blog.content}</p>
+            `;
+            modal.classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+
+        // Unified slide up animation on scroll for all elements
+        function slideUpOnScroll() {
+            const elements = document.querySelectorAll('.slide-up');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 100;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Initialize animations
+        window.addEventListener('scroll', slideUpOnScroll);
+        window.addEventListener('load', slideUpOnScroll);
+
+        // Form submission with Excel export functionality
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const loadingText = document.getElementById('loadingText');
+            const successMsg = document.getElementById('formSuccess');
+            const errorMsg = document.getElementById('formError');
+            
+            // Hide previous messages
+            successMsg.classList.add('hidden');
+            errorMsg.classList.add('hidden');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitText.classList.add('hidden');
+            loadingText.classList.remove('hidden');
+            
+            try {
+                // Submit to Formspree
+                const formData = new FormData(form);
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    // Show success message
+                    successMsg.classList.remove('hidden');
+                    form.reset();
+                    
+                    // Also save to local storage for backup (optional)
+                    saveToLocalStorage(formData);
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorMsg.classList.remove('hidden');
+            } finally {
+                // Reset button state
+                submitBtn.disabled = false;
+                submitText.classList.remove('hidden');
+                loadingText.classList.add('hidden');
+            }
+        });
+        
+        // Save form data to local storage as backup
+        function saveToLocalStorage(formData) {
+            const data = {
+                timestamp: new Date().toISOString(),
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                inquiry_type: formData.get('inquiry_type'),
+                message: formData.get('message')
+            };
+            
+            // Get existing submissions
+            let submissions = JSON.parse(localStorage.getItem('formSubmissions') || '[]');
+            submissions.push(data);
+            
+            // Keep only last 100 submissions
+            if (submissions.length > 100) {
+                submissions = submissions.slice(-100);
+            }
+            
+            localStorage.setItem('formSubmissions', JSON.stringify(submissions));
+        }
+        
+        // Function to export local data to CSV (can be opened in Excel)
+        function exportToCSV() {
+            const submissions = JSON.parse(localStorage.getItem('formSubmissions') || '[]');
+            
+            if (submissions.length === 0) {
+                alert('No form submissions found in local storage.');
+                return;
+            }
+            
+            // Create CSV content
+            const headers = ['Timestamp', 'Name', 'Email', 'Phone', 'Inquiry Type', 'Message'];
+            let csvContent = headers.join(',') + '\n';
+            
+            submissions.forEach(submission => {
+                const row = [
+                    submission.timestamp,
+                    `"${submission.name || ''}"`,
+                    submission.email || '',
+                    submission.phone || '',
+                    submission.inquiry_type || '',
+                    `"${(submission.message || '').replace(/"/g, '""')}"`
+                ];
+                csvContent += row.join(',') + '\n';
+            });
+            
+            // Create and download file
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            if (link.download !== undefined) {
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', `contact_form_submissions_${new Date().toISOString().split('T')[0]}.csv`);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+        
+        // Add keyboard shortcut for admin to export data (Ctrl+Shift+E)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'E') {
+                exportToCSV();
+            }
+        });
+
+        // Testimonial Form Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Star Rating System
+            const stars = document.querySelectorAll('.star');
+            const ratingInput = document.getElementById('testimonial-rating');
+            const ratingText = document.getElementById('ratingText');
+            
+            const ratingLabels = {
+                1: 'Poor',
+                2: 'Fair', 
+                3: 'Good',
+                4: 'Very Good',
+                5: 'Excellent'
+            };
+
+            stars.forEach((star, index) => {
+                star.addEventListener('mouseenter', function() {
+                    highlightStars(index + 1);
+                });
+                
+                star.addEventListener('mouseleave', function() {
+                    const currentRating = parseInt(ratingInput.value) || 0;
+                    highlightStars(currentRating);
+                });
+                
+                star.addEventListener('click', function() {
+                    const rating = index + 1;
+                    ratingInput.value = rating;
+                    ratingText.textContent = ratingLabels[rating];
+                    highlightStars(rating);
+                });
+            });
+
+            function highlightStars(count) {
+                stars.forEach((star, index) => {
+                    if (index < count) {
+                        star.classList.add('active');
+                    } else {
+                        star.classList.remove('active');
+                    }
+                });
+            }
+
+            // Character Counter
+            const testimonialText = document.getElementById('testimonial-text');
+            const charCount = document.getElementById('charCount');
+            
+            testimonialText.addEventListener('input', function() {
+                const count = this.value.length;
+                charCount.textContent = count;
+                
+                if (count > 450) {
+                    charCount.style.color = '#ef4444';
+                } else if (count > 400) {
+                    charCount.style.color = '#f59e0b';
+                } else {
+                    charCount.style.color = '#6b7280';
+                }
+            });
+
+            // Testimonial Form Submission
+            const testimonialForm = document.getElementById('testimonialForm');
+            testimonialForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const submitBtn = document.getElementById('testimonialSubmitBtn');
+                const submitText = document.getElementById('testimonialSubmitText');
+                const loadingText = document.getElementById('testimonialLoadingText');
+                const successMsg = document.getElementById('testimonialSuccess');
+                const errorMsg = document.getElementById('testimonialError');
+                
+                // Hide previous messages
+                successMsg.classList.add('hidden');
+                errorMsg.classList.add('hidden');
+                
+                // Show loading state
+                submitBtn.disabled = true;
+                submitText.classList.add('hidden');
+                loadingText.classList.remove('hidden');
+                
+                try {
+                    const formData = new FormData(testimonialForm);
+                    
+                    // Add rating label to form data
+                    const rating = formData.get('testimonial_rating');
+                    formData.append('rating_label', ratingLabels[rating] || 'Not specified');
+                    
+                    const response = await fetch(testimonialForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        // Show success message
+                        successMsg.classList.remove('hidden');
+                        testimonialForm.reset();
+                        
+                        // Reset star rating
+                        ratingInput.value = '';
+                        ratingText.textContent = 'Please select a rating';
+                        highlightStars(0);
+                        
+                        // Reset character counter
+                        charCount.textContent = '0';
+                        charCount.style.color = '#6b7280';
+                        
+                        // Save to local storage for backup
+                        saveTestimonialToLocalStorage(formData);
+                        
+                        // Scroll to success message
+                        successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    errorMsg.classList.remove('hidden');
+                    errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } finally {
+                    // Reset button state
+                    submitBtn.disabled = false;
+                    submitText.classList.remove('hidden');
+                    loadingText.classList.add('hidden');
+                }
+            });
+        });
+
+        // Save testimonial data to local storage as backup
+        function saveTestimonialToLocalStorage(formData) {
+            const data = {
+                timestamp: new Date().toISOString(),
+                name: formData.get('testimonial_name'),
+                role: formData.get('testimonial_role'),
+                email: formData.get('testimonial_email'),
+                organization: formData.get('testimonial_organization'),
+                category: formData.get('testimonial_category'),
+                rating: formData.get('testimonial_rating'),
+                testimonial: formData.get('testimonial_text'),
+                consent: formData.get('testimonial_consent'),
+                contact_permission: formData.get('testimonial_contact')
+            };
+            
+            // Get existing testimonials
+            let testimonials = JSON.parse(localStorage.getItem('testimonialSubmissions') || '[]');
+            testimonials.push(data);
+            
+            // Keep only last 50 testimonials
+            if (testimonials.length > 50) {
+                testimonials = testimonials.slice(-50);
+            }
+            
+            localStorage.setItem('testimonialSubmissions', JSON.stringify(testimonials));
+        }
+
+        // Function to export testimonial data to CSV
+        function exportTestimonialsToCSV() {
+            const testimonials = JSON.parse(localStorage.getItem('testimonialSubmissions') || '[]');
+            
+            if (testimonials.length === 0) {
+                alert('No testimonial submissions found in local storage.');
+                return;
+            }
+            
+            // Create CSV content
+            const headers = ['Timestamp', 'Name', 'Role', 'Email', 'Organization', 'Category', 'Rating', 'Testimonial', 'Consent', 'Contact Permission'];
+            let csvContent = headers.join(',') + '\n';
+            
+            testimonials.forEach(testimonial => {
+                const row = [
+                    testimonial.timestamp,
+                    `"${testimonial.name || ''}"`,
+                    `"${testimonial.role || ''}"`,
+                    testimonial.email || '',
+                    `"${testimonial.organization || ''}"`,
+                    testimonial.category || '',
+                    testimonial.rating || '',
+                    `"${(testimonial.testimonial || '').replace(/"/g, '""')}"`,
+                    testimonial.consent || '',
+                    testimonial.contact_permission || ''
+                ];
+                csvContent += row.join(',') + '\n';
+            });
+            
+            // Create and download file
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            if (link.download !== undefined) {
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', `testimonial_submissions_${new Date().toISOString().split('T')[0]}.csv`);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+
+        // Add keyboard shortcut for admin to export testimonial data (Ctrl+Shift+T)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'T') {
+                exportTestimonialsToCSV();
+            }
+        });
+    </script>
+</body>
+</html>
