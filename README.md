@@ -1,1 +1,1 @@
-# nvc-web
+Our university volunteer club website building.
