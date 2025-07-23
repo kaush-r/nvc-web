@@ -316,61 +316,61 @@ function openModal(modalId) {
     
     // Sample modal content - you can customize this based on modalId
     const modalContents = {
-        'modal1': `
+'modal1': `
             <div class="gallery-image" style="height: 400px; font-size: 4rem;">
-                <i class="fas fa-users"></i>
+                <img src="https://d3c539pel8wzjz.cloudfront.net/wp-content/uploads/2025/06/Orientation-Programme-for-June-2025-Intake-20-1037x600.jpg" alt="Siyapath Siya Udanaya 2025" style="width: 100%; height: 400px; object-fit: cover; border-radius: 10px;">
             </div>
-            <h3 class="text-center mt-4">Community Clean-up Drive</h3>
-            <p class="text-center">Our volunteers working together to clean local parks and waterways, making a positive environmental impact.</p>
+            <h3 class="text-center mt-4"> NSBM 25.2 ORIENTATION PROGRAMME 2025</h3>
+            <p class="text-center">Our orientation program warmly welcomes new students, helping them connect with peers and explore the exciting life at NSBM. It’s the first chapter of an unforgettable journey.</p>
         `,
         'modal2': `
             <div class="gallery-image" style="height: 400px; font-size: 4rem;">
-                <i class="fas fa-laptop"></i>
+                 <img src="https://d3c539pel8wzjz.cloudfront.net/wp-content/uploads/2025/05/siyapathsiya-udanaya2025.jpg" alt="Siyapath Siya Udanaya 2025" style="width: 100%; height: 400px; object-fit: cover; border-radius: 10px;">
             </div>
-            <h3 class="text-center mt-4">Digital Literacy Workshop</h3>
-            <p class="text-center">Teaching essential computer skills to community members of all ages, bridging the digital divide.</p>
+            <h3 class="text-center mt-4">NSBM SIYAPTH SIYA UDANAYA 2025</h3>
+            <p class="text-center">Siyapath Siya Udanaya celebrates the vibrant traditions and creative talents of NSBM students, fostering cultural unity through performances and joyful festivities.</p>
         `,
         'modal3': `
             <div class="gallery-image" style="height: 400px; font-size: 4rem;">
-                <i class="fas fa-heart"></i>
+                <img src="https://www.nsbm.ac.lk/wp-content/uploads/2025/03/NSBM-Sports-Fiesta-2025-Grand-Finale-5.jpg" alt="Siyapath Siya Udanaya 2025" style="width: 100%; height: 400px; object-fit: cover; border-radius: 10px;">
             </div>
-            <h3 class="text-center mt-4">Charity Fundraiser</h3>
-            <p class="text-center">Successfully raised funds for local community programs and educational initiatives.</p>
+            <h3 class="text-center mt-4">NSBM SPORT FIESTA 2025</h3>
+            <p class="text-center">An energetic celebration of sportsmanship where students showcase their athletic talents, team spirit, and determination in various sporting events.</p>
         `,
         'modal4': `
             <div class="gallery-image" style="height: 400px; font-size: 4rem;">
-                <i class="fas fa-handshake"></i>
+                <img src="https://d3c539pel8wzjz.cloudfront.net/wp-content/uploads/2023/08/PHOTO-2023-06-01-17-54-32.jpg" alt="Siyapath Siya Udanaya 2025" style="width: 100%; height: 400px; object-fit: cover; border-radius: 10px;">
             </div>
-            <h3 class="text-center mt-4">Team Building Event</h3>
-            <p class="text-center">Building stronger connections within our volunteer community through collaborative activities.</p>
+            <h3 class="text-center mt-4">ICOBI 2024</h3>
+            <p class="text-center">The International Conference on Business Innovation (ICOBI) brings together scholars and industry professionals to discuss innovative business ideas and global market trends</p>
         `,
         'modal5': `
             <div class="gallery-image" style="height: 400px; font-size: 4rem;">
-                <i class="fas fa-trophy"></i>
+                <img src="https://d3c539pel8wzjz.cloudfront.net/wp-content/uploads/2024/11/NSBMColoursHonorsSportingStarsfor2023and20241-1037x600.jpg" alt="Siyapath Siya Udanaya 2025" style="width: 100%; height: 400px; object-fit: cover; border-radius: 10px;">
             </div>
-            <h3 class="text-center mt-4">Awards Ceremony</h3>
-            <p class="text-center">Celebrating our achievements and recognizing outstanding volunteers for their contributions.</p>
+            <h3 class="text-center mt-4">NSBM COLOURS 2024</h3>
+            <p class="text-center">A glamorous awards ceremony recognizing and rewarding outstanding student achievements in sports, academics, and extra-curricular activities.</p>
         `,
         'modal6': `
             <div class="gallery-image" style="height: 400px; font-size: 4rem;">
-                <i class="fas fa-network-wired"></i>
+                <img src="https://d3c539pel8wzjz.cloudfront.net/wp-content/uploads/2025/01/IMG_2626.jpg" alt="Siyapath Siya Udanaya 2025" style="width: 100%; height: 400px; object-fit: cover; border-radius: 10px;">
             </div>
-            <h3 class="text-center mt-4">Community Outreach</h3>
-            <p class="text-center">Connecting with local organizations to expand our impact and reach more community members.</p>
+            <h3 class="text-center mt-4">NSBM ICTAR 2024</h3>
+            <p class="text-center">The ICT Academic and Research Conference (ICTAR) promotes technological advancement by encouraging research, knowledge sharing, and innovation within the IT industry.</p>
         `,
         'modal7': `
             <div class="gallery-image" style="height: 400px; font-size: 4rem;">
-                <i class="fas fa-lightbulb"></i>
+                <img src="https://media.licdn.com/dms/image/v2/C5622AQGWzyQkq7NnmQ/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1673588948732?e=2147483647&v=beta&t=ML5cOrovjSYzww7-EPQ_JoHSYx88JHixsgHMlVUjYl4" alt="Siyapath Siya Udanaya 2025" style="width: 100%; height: 400px; object-fit: cover; border-radius: 10px;">
             </div>
-            <h3 class="text-center mt-4">Innovation Project</h3>
-            <p class="text-center">Developing technological solutions for community challenges through collaborative innovation.</p>
+            <h3 class="text-center mt-4">SPIRITOUS</h3>
+            <p class="text-center">Spirituous is the official installation ceremony of the NSBM Volunteer Club, celebrating leadership, volunteerism, and the positive impact students make in the community.</p>
         `,
         'modal8': `
             <div class="gallery-image" style="height: 400px; font-size: 4rem;">
-                <i class="fas fa-hands-helping"></i>
+                <img src=https://www.nsbm.ac.lk/wp-content/uploads/2023/08/media-cover-1024x356.jpg"" alt="Siyapath Siya Udanaya 2025" style="width: 100%; height: 400px; object-fit: cover; border-radius: 10px;">
             </div>
-            <h3 class="text-center mt-4">Partnership Event</h3>
-            <p class="text-center">Collaborating with other organizations for greater community impact and sustainable change.</p>
+            <h3 class="text-center mt-4">ADM 24</h3>
+            <p class="text-center">The Annual General Meeting marks the yearly review of activities, presenting accomplishments and plans while appreciating the dedicated efforts of all members.</p>
         `
     };
     
