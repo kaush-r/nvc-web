@@ -236,22 +236,23 @@
     </section>
 
     <!-- Latest Events & Updates Section -->
-    <section id="latest-events" class="section slide-up">
+
+    <section class="section" id="latest">
         <div class="container">
             <h2 class="section-title gradient-text">Latest Events & Updates</h2>
             <p class="section-subtitle">Stay updated with our latest achievements, events, and community impact stories</p>
             
             <div class="blog-filters">
-                <button class="filter-btn active" onclick="filterPosts('All')">All</button>
-                <button class="filter-btn" onclick="filterPosts('Awards')">Awards</button>
-                <button class="filter-btn" onclick="filterPosts('Community')">Community</button>
-                <button class="filter-btn" onclick="filterPosts('Events')">Events</button>
-                <button class="filter-btn" onclick="filterPosts('Partnerships')">Partnerships</button>
-                <button class="filter-btn" onclick="filterPosts('Member Spotlight')">Member Spotlight</button>
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Awards</button>
+                <button class="filter-btn">Community</button>
+                <button class="filter-btn">Events</button>
+                <button class="filter-btn">Partnerships</button>
+                <button class="filter-btn">Member Spotlight</button>
             </div>
-            
-            <div class="grid grid-cols-3" id="blogGrid">
-                <div class="blog-card glass-card slide-up" data-category="Awards">
+
+            <div class="grid grid-cols-3">
+                <div class="blog-card slide-up glass-card" data-category="Awards">
                     <div class="blog-image">
                         <i class="fas fa-trophy"></i>
                     </div>
@@ -266,13 +267,13 @@
                             <span class="tag">#Community</span>
                             <span class="tag">#Technology</span>
                         </div>
-                        <button class="btn btn-secondary" onclick="openBlogModal('blog1')">Read More</button>
+                        <a href="blog.html?id=blog1" class="btn btn-primary">Read More</a>
                     </div>
                 </div>
-                
-                <div class="blog-card glass-card slide-up" data-category="Community">
+
+                <div class="blog-card slide-up glass-card" data-category="Community">
                     <div class="blog-image">
-                        <i class="fas fa-graduation-cap"></i>
+                        <i class="fas fa-users"></i>
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
@@ -285,11 +286,11 @@
                             <span class="tag">#Digital Literacy</span>
                             <span class="tag">#Workshops</span>
                         </div>
-                        <button class="btn btn-secondary" onclick="openBlogModal('blog2')">Read More</button>
+                        <a href="blog.html?id=blog2" class="btn btn-primary">Read More</a>
                     </div>
                 </div>
-                
-                <div class="blog-card glass-card slide-up" data-category="Events">
+
+                <div class="blog-card slide-up glass-card" data-category="Events">
                     <div class="blog-image">
                         <i class="fas fa-code"></i>
                     </div>
@@ -304,11 +305,11 @@
                             <span class="tag">#Technology</span>
                             <span class="tag">#Social Impact</span>
                         </div>
-                        <button class="btn btn-secondary" onclick="openBlogModal('blog3')">Read More</button>
+                        <a href="blog.html?id=blog3" class="btn btn-primary">Read More</a>
                     </div>
                 </div>
-                
-                <div class="blog-card glass-card slide-up" data-category="Partnerships">
+
+                <div class="blog-card slide-up glass-card" data-category="Partnerships">
                     <div class="blog-image">
                         <i class="fas fa-handshake"></i>
                     </div>
@@ -323,11 +324,11 @@
                             <span class="tag">#Food Security</span>
                             <span class="tag">#Software Development</span>
                         </div>
-                        <button class="btn btn-secondary" onclick="openBlogModal('blog4')">Read More</button>
+                        <a href="blog.html?id=blog4" class="btn btn-primary">Read More</a>
                     </div>
                 </div>
-                
-                <div class="blog-card glass-card slide-up" data-category="Member Spotlight">
+
+                <div class="blog-card slide-up glass-card" data-category="Member Spotlight">
                     <div class="blog-image">
                         <i class="fas fa-star"></i>
                     </div>
@@ -342,13 +343,13 @@
                             <span class="tag">#Innovation</span>
                             <span class="tag">#Student Success</span>
                         </div>
-                        <button class="btn btn-secondary" onclick="openBlogModal('blog5')">Read More</button>
+                        <a href="blog.html?id=blog5" class="btn btn-primary">Read More</a>
                     </div>
                 </div>
-                
-                <div class="blog-card glass-card slide-up" data-category="Community">
+
+                <div class="blog-card slide-up glass-card" data-category="Community">
                     <div class="blog-image">
-                        <i class="fas fa-dollar-sign"></i>
+                        <i class="fas fa-donate"></i>
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
@@ -361,12 +362,13 @@
                             <span class="tag">#STEM Education</span>
                             <span class="tag">#Community Impact</span>
                         </div>
-                        <button class="btn btn-secondary" onclick="openBlogModal('blog6')">Read More</button>
+                        <a href="blog.html?id=blog6" class="btn btn-primary">Read More</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
     
      <!-- Gallery Section -->
     <section id="gallery" class="section slide-up" style="margin-top: 50px;">
