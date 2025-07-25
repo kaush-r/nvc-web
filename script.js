@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize smooth scrolling
     initializeSmoothScrolling();
+    
+    // Load blog content if on blog.html
+    loadBlogContent();
 });
 
 // Animation Functions
@@ -383,117 +386,144 @@ function openModal(modalId) {
     }
 }
 
-function openBlogModal(blogId) {
-    const modal = document.getElementById('blogModal');
-    const content = document.getElementById('modalBlogContent');
-    
-    const blogContents = {
-        'blog1': {
-            title: 'TechVolunteers Wins University Innovation Award',
-            content: `
-                <p>We are thrilled to announce that TechVolunteers has been awarded the prestigious University Innovation Award for 2024. This recognition comes after our successful implementation of the "Digital Bridge" project, which connected over 500 senior citizens with essential digital literacy skills.</p>
-                <p>The project utilized a custom-built learning management system developed entirely by our student volunteers, featuring adaptive learning paths and multilingual support. Key achievements include:</p>
-                <ul>
-                    <li>Development of a mobile app for local food banks</li>
-                    <li>Creation of digital literacy programs for seniors</li>
-                    <li>Implementation of sustainable technology solutions</li>
-                    <li>Successful coordination of 50+ community projects</li>
-                </ul>
-                <p>We couldn't have achieved this without the dedication of our 200+ active members and the support of our university community.</p>
-            `
-        },
-        'blog2': {
-            title: 'Successful Digital Literacy Workshop Series Concludes',
-            content: `
-                <p>Our six-month Digital Literacy Workshop Series has successfully concluded, marking a significant milestone in our community outreach efforts. The program, which ran from September 2023 to February 2024, provided comprehensive digital skills training to over 200 community members.</p>
-                <p>The workshops covered fundamental computer skills, internet safety, social media literacy, and practical applications for daily life. Participants ranged from teenagers looking to improve their digital skills to seniors learning to connect with family online.</p>
-                <p>Program highlights include:</p>
-                <ul>
-                    <li>95% completion rate among participants</li>
-                    <li>Average skill improvement of 75%</li>
-                    <li>30+ volunteer instructors involved</li>
-                    <li>Partnerships with 5 local libraries</li>
-                </ul>
-                <p>The positive feedback and success stories from participants have motivated us to expand the program next semester.</p>
-            `
-        },
-        'blog3': {
-            title: 'Announcing Our Spring 2024 Hackathon: Code for Change',
-            content: `
-                <p>We are excited to announce our upcoming Spring 2024 Hackathon: "Code for Change", scheduled for April 12-14, 2024. This 48-hour intensive event will bring together students, professionals, and community leaders to develop innovative technology solutions addressing local social challenges.</p>
-                <p>The hackathon will focus on four key areas:</p>
-                <ul>
-                    <li>Environmental sustainability solutions</li>
-                    <li>Educational technology for underserved communities</li>
-                    <li>Healthcare accessibility applications</li>
-                    <li>Community safety and emergency response systems</li>
-                </ul>
-                <p>Registration is now open with prizes totaling $10,000 and mentorship opportunities with industry professionals.</p>
-            `
-        },
-        'blog4': {
-            title: 'Partnership with Local Food Bank Launches Tech Initiative',
-            content: `
-                <p>TechVolunteers is proud to announce our new partnership with the Metro Community Food Bank, launching an innovative technology initiative to revolutionize food distribution efficiency.</p>
-                <p>Our team of computer science and business students has developed a comprehensive inventory management system that tracks food donations, manages expiration dates, and optimizes distribution routes. The system has already shown remarkable results:</p>
-                <ul>
-                    <li>40% increase in distribution efficiency</li>
-                    <li>50% reduction in food waste</li>
-                    <li>Real-time tracking of inventory levels</li>
-                    <li>Automated reporting for donors and stakeholders</li>
-                </ul>
-                <p>This partnership exemplifies our commitment to using technology for social good and creating sustainable solutions for community challenges.</p>
-            `
-        },
-        'blog5': {
-            title: 'Member Spotlight: Building Apps for Accessibility',
-            content: `
-                <p>This month, we are highlighting Jessica Liu, a junior Computer Science major whose passion for accessibility has led to the development of "CampusNavigate", an innovative mobile app designed to make our university more accessible for students with disabilities.</p>
-                <p>Jessica joined TechVolunteers in her freshman year and quickly became involved in our accessibility initiatives. Her app features:</p>
-                <ul>
-                    <li>Audio navigation for visually impaired students</li>
-                    <li>Real-time accessibility status of campus facilities</li>
-                    <li>Emergency assistance features</li>
-                    <li>Integration with campus transportation services</li>
-                </ul>
-                <p>"Technology should be inclusive by design, not as an afterthought," says Jessica. Her work has inspired other members to focus on accessibility in their projects.</p>
-            `
-        },
-        'blog6': {
-            title: 'Fundraising Success: $15K Raised for Local STEM Education',
-            content: `
-                <p>We are thrilled to report that our annual "Tech for Tomorrow" fundraising campaign has exceeded all expectations, raising $15,000 for STEM education programs in underserved local schools.</p>
-                <p>The campaign, which ran throughout February, included various activities:</p>
-                <ul>
-                    <li>Charity gaming tournament</li>
-                    <li>Tech skill workshops with donation-based admission</li>
-                    <li>Crowdfunding initiative supported by our alumni network</li>
-                    <li>Corporate sponsorship partnerships</li>
-                </ul>
-                <p>These funds will directly support the purchase of computers, robotics kits, and programming resources for three local elementary schools, impacting over 500 students in their STEM learning journey.</p>
-            `
-        }
-    };
-    
-    const blog = blogContents[blogId];
-    if (blog && content) {
-        content.innerHTML = `
-            <h2 class="gradient-text mb-4">${blog.title}</h2>
-            ${blog.content}
-        `;
+// Blog content data
+const blogContents = {
+    'blog1': {
+        title: 'TechVolunteers Wins University Innovation Award',
+        author: 'Alex Chen',
+        date: 'March 10, 2024',
+        readTime: '3 min read',
+        tags: ['#Innovation', '#Community', '#Technology'],
+        content: `
+            <img src="https://example.com/award-image.jpg" alt="Award" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+            <p>We are thrilled to announce that TechVolunteers has been awarded the prestigious University Innovation Award for 2024. This recognition comes after our successful implementation of the "Digital Bridge" project, which connected over 500 senior citizens with essential digital literacy skills.</p>
+            <p>The project utilized a custom-built learning management system developed entirely by our student volunteers, featuring adaptive learning paths and multilingual support. Key achievements include:</p>
+            <ul>
+                <li>Development of a mobile app for local food banks</li>
+                <li>Creation of digital literacy programs for seniors</li>
+                <li>Implementation of sustainable technology solutions</li>
+                <li>Successful coordination of 50+ community projects</li>
+            </ul>
+            <p>We couldn't have achieved this without the dedication of our 200+ active members and the support of our university community.</p>
+        `
+    },
+    'blog2': {
+        title: 'Successful Digital Literacy Workshop Series Concludes',
+        author: 'Sarah Johnson',
+        date: 'February 28, 2024',
+        readTime: '4 min read',
+        tags: ['#Education', '#Digital Literacy', '#Workshops'],
+        content: `
+            <img src="https://example.com/workshop-image.jpg" alt="Workshop" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+            <p>Our six-month Digital Literacy Workshop Series has successfully concluded, marking a significant milestone in our community outreach efforts. The program, which ran from September 2023 to February 2024, provided comprehensive digital skills training to over 200 community members.</p>
+            <p>The workshops covered fundamental computer skills, internet safety, social media literacy, and practical applications for daily life. Participants ranged from teenagers looking to improve their digital skills to seniors learning to connect with family online.</p>
+            <p>Program highlights include:</p>
+            <ul>
+                <li>95% completion rate among participants</li>
+                <li>Average skill improvement of 75%</li>
+                <li>30+ volunteer instructors involved</li>
+                <li>Partnerships with 5 local libraries</li>
+            </ul>
+            <p>The positive feedback and success stories from participants have motivated us to expand the program next semester.</p>
+        `
+    },
+    'blog3': {
+        title: 'Announcing Our Spring 2024 Hackathon: Code for Change',
+        author: 'Marcus Rodriguez',
+        date: 'March 5, 2024',
+        readTime: '2 min read',
+        tags: ['#Hackathon', '#Technology', '#Social Impact'],
+        content: `
+            <img src="https://example.com/hackathon-image.jpg" alt="Hackathon" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+            <p>We are excited to announce our upcoming Spring 2024 Hackathon: "Code for Change", scheduled for April 12-14, 2024. This 48-hour intensive event will bring together students, professionals, and community leaders to develop innovative technology solutions addressing local social challenges.</p>
+            <p>The hackathon will focus on four key areas:</p>
+            <ul>
+                <li>Environmental sustainability solutions</li>
+                <li>Educational technology for underserved communities</li>
+                <li>Healthcare accessibility applications</li>
+                <li>Community safety and emergency response systems</li>
+            </ul>
+            <p>Registration is now open with prizes totaling $10,000 and mentorship opportunities with industry professionals.</p>
+        `
+    },
+    'blog4': {
+        title: 'Partnership with Local Food Bank Launches Tech Initiative',
+        author: 'Emily Zhang',
+        date: 'February 15, 2024',
+        readTime: '5 min read',
+        tags: ['#Partnership', '#Food Security', '#Software Development'],
+        content: `
+            <img src="https://example.com/foodbank-image.jpg" alt="Food Bank" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+            <p>TechVolunteers is proud to announce our new partnership with the Metro Community Food Bank, launching an innovative technology initiative to revolutionize food distribution efficiency.</p>
+            <p>Our team of computer science and business students has developed a comprehensive inventory management system that tracks food donations, manages expiration dates, and optimizes distribution routes. The system has already shown remarkable results:</p>
+            <ul>
+                <li>40% increase in distribution efficiency</li>
+                <li>50% reduction in food waste</li>
+                <li>Real-time tracking of inventory levels</li>
+                <li>Automated reporting for donors and stakeholders</li>
+            </ul>
+            <p>This partnership exemplifies our commitment to using technology for social good and creating sustainable solutions for community challenges.</p>
+        `
+    },
+    'blog5': {
+        title: 'Member Spotlight: Building Apps for Accessibility',
+        author: 'Alex Chen',
+        date: 'March 1, 2024',
+        readTime: '4 min read',
+        tags: ['#Accessibility', '#Innovation', '#Student Success'],
+        content: `
+            <img src="https://example.com/accessibility-image.jpg" alt="Accessibility App" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+            <p>This month, we are highlighting Jessica Liu, a junior Computer Science major whose passion for accessibility has led to the development of "CampusNavigate", an innovative mobile app designed to make our university more accessible for students with disabilities.</p>
+            <p>Jessica joined TechVolunteers in her freshman year and quickly became involved in our accessibility initiatives. Her app features:</p>
+            <ul>
+                <li>Audio navigation for visually impaired students</li>
+                <li>Real-time accessibility status of campus facilities</li>
+                <li>Emergency assistance features</li>
+                <li>Integration with campus transportation services</li>
+            </ul>
+            <p>"Technology should be inclusive by design, not as an afterthought," says Jessica. Her work has inspired other members to focus on accessibility in their projects.</p>
+        `
+    },
+    'blog6': {
+        title: 'Fundraising Success: $15K Raised for Local STEM Education',
+        author: 'Sarah Johnson',
+        date: 'February 20, 2024',
+        readTime: '3 min read',
+        tags: ['#Fundraising', '#STEM Education', '#Community Impact'],
+        content: `
+            <img src="https://example.com/fundraising-image.jpg" alt="Fundraising" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+            <p>We are thrilled to report that our annual "Tech for Tomorrow" fundraising campaign has exceeded all expectations, raising $15,000 for STEM education programs in underserved local schools.</p>
+            <p>The campaign, which ran throughout February, included various activities:</p>
+            <ul>
+                <li>Charity gaming tournament</li>
+                <li>Tech skill workshops with donation-based admission</li>
+                <li>Crowdfunding initiative supported by our alumni network</li>
+                <li>Corporate sponsorship partnerships</li>
+            </ul>
+            <p>These funds will directly support the purchase of computers, robotics kits, and programming resources for three local elementary schools, impacting over 500 students in their STEM learning journey.</p>
+        `
     }
-    
-    if (modal) {
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-}
+};
 
-function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = 'auto';
+// Load blog content based on query parameter
+function loadBlogContent() {
+    if (window.location.pathname.includes('blog.html')) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const blogId = urlParams.get('id');
+        const blog = blogContents[blogId];
+
+        if (blog) {
+            document.getElementById('blog-title').textContent = blog.title;
+            document.getElementById('blog-author').textContent = blog.author;
+            document.getElementById('blog-date').textContent = blog.date;
+            document.getElementById('blog-read-time').textContent = blog.readTime;
+            document.getElementById('blog-content').innerHTML = blog.content;
+            document.getElementById('blog-tags').innerHTML = blog.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+            // Update meta description for SEO
+            document.querySelector('meta[name="description"]').setAttribute('content', blog.content.split('.')[0] + '.');
+        } else {
+            document.getElementById('blog-content').innerHTML = '<p class="text-center">Blog post not found.</p>';
+        }
     }
 }
 

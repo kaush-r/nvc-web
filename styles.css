@@ -18,6 +18,61 @@ body {
     position: relative;
 }
 
+/* Blog Detail Page Styles */
+.blog-content img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.blog-content ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.blog-content li {
+    margin-bottom: 0.5rem;
+    color: #374151;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.blog-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #374151;
+    margin-bottom: 1rem;
+}
+
+.blog-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.tag {
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
+    padding: 0.25rem 0.5rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Ensure smooth scrolling and animations work */
+.blog-content {
+    transition: all 0.3s ease;
+}
+
+.blog-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(16, 185, 129, 0.25);
+}
+
+
 /* Animated Background Bubbles */
 .bubble-container {
     position: fixed;
