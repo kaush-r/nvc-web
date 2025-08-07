@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize animations
     initializeAnimations();
     
+    // Initialize hero carousel
+    initializeHeroCarousel();
+    
+    // Initialize landing page scroll transitions
+    initializeLandingPageTransitions();
+    
     // Initialize testimonial form
     initializeTestimonialForm();
     
@@ -62,6 +68,89 @@ function slideUpOnScroll() {
             element.classList.add('visible');
         }
     });
+}
+
+// Hero Carousel Functions
+function initializeHeroCarousel() {
+    const slides = document.querySelectorAll('.carousel-slide');
+    let currentSlide = 0;
+    let carouselInterval;
+    const isMobile = window.innerWidth <= 767;
+    
+    if (slides.length === 0) return;
+    
+    // Preload images for better performance
+    slides.forEach((slide, index) => {
+        const img = slide.querySelector('img');
+        if (img && img.src) {
+            const preloadImg = new Image();
+            preloadImg.src = img.src;
+            
+            // Add loading attribute for lazy loading on mobile
+            if (isMobile && index > 0) {
+                img.loading = 'lazy';
+            }
+        }
+    });
+    
+    function nextSlide() {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }
+    
+    function startCarousel() {
+        // Clear any existing interval
+        if (carouselInterval) {
+            clearInterval(carouselInterval);
+        }
+        // Adjust interval based on device - faster on mobile to save battery
+        const interval = isMobile ? 8000 : 6000;
+        carouselInterval = setInterval(nextSlide, interval);
+    }
+    
+    function pauseCarousel() {
+        if (carouselInterval) {
+            clearInterval(carouselInterval);
+        }
+    }
+    
+    // Start the carousel
+    startCarousel();
+    
+    // Pause carousel when user is not viewing the page (saves battery/performance)
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            pauseCarousel();
+        } else {
+            startCarousel();
+        }
+    });
+    
+    // Only add hover events on non-mobile devices
+    if (!isMobile) {
+        const heroSection = document.querySelector('.hero');
+        if (heroSection) {
+            heroSection.addEventListener('mouseenter', pauseCarousel);
+            heroSection.addEventListener('mouseleave', startCarousel);
+        }
+    }
+    
+    // Pause carousel when device battery is low (for mobile)
+    if ('getBattery' in navigator) {
+        navigator.getBattery().then(function(battery) {
+            function updateCarouselForBattery() {
+                if (battery.level < 0.2 && battery.charging === false) {
+                    pauseCarousel();
+                } else if (battery.level > 0.2 || battery.charging) {
+                    startCarousel();
+                }
+            }
+            
+            battery.addEventListener('levelchange', updateCarouselForBattery);
+            battery.addEventListener('chargingchange', updateCarouselForBattery);
+        });
+    }
 }
 
 // Mobile Navigation
@@ -738,13 +827,75 @@ function scrollToTop() {
     });
 }
 
-// Parallax effect for hero background (optional)
-window.addEventListener('scroll', function() {
-    const scrolled = window.pageYOffset;
-    const rate = scrolled * -0.5;
-    
+// Enhanced Landing Page Scroll Transitions
+function initializeLandingPageTransitions() {
     const hero = document.querySelector('.hero');
-    if (hero && scrolled < hero.offsetHeight) {
-        hero.style.transform = `translateY(${rate}px)`;
+    const heroContent = document.querySelector('.hero-content');
+    const heroOverlay = document.querySelector('.hero-overlay');
+    const heroCarousel = document.querySelector('.hero-carousel');
+    const header = document.querySelector('.header');
+    
+    if (!hero || !heroContent) return;
+    
+    let ticking = false;
+    
+    function updateScrollEffects() {
+        const scrolled = window.pageYOffset;
+        const heroHeight = hero.offsetHeight;
+        const scrollProgress = Math.min(scrolled / (heroHeight * 0.8), 1);
+        
+        // Hero content fade and transform
+        if (scrollProgress > 0.1) {
+            heroContent.classList.add('scrolled');
+            if (heroOverlay) heroOverlay.classList.add('scrolled');
+            if (heroCarousel) heroCarousel.classList.add('scrolled');
+        } else {
+            heroContent.classList.remove('scrolled');
+            if (heroOverlay) heroOverlay.classList.remove('scrolled');
+            if (heroCarousel) heroCarousel.classList.remove('scrolled');
+        }
+        
+        // Header background transition
+        if (header) {
+            if (scrolled > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }
+        
+        // Enhanced parallax for hero background
+        if (scrolled < heroHeight) {
+            const parallaxRate = scrolled * -0.3;
+            hero.style.transform = `translateY(${parallaxRate}px)`;
+            
+            // Dynamic opacity for hero content based on scroll
+            const opacityValue = Math.max(0.1, 1 - scrollProgress * 1.2);
+            heroContent.style.opacity = opacityValue;
+            
+            // Scale effect for carousel
+            if (heroCarousel) {
+                const scaleValue = 1 + scrollProgress * 0.1;
+                heroCarousel.style.transform = `scale(${scaleValue})`;
+            }
+        }
+        
+        ticking = false;
     }
-});
+    
+    function requestScrollUpdate() {
+        if (!ticking) {
+            requestAnimationFrame(updateScrollEffects);
+            ticking = true;
+        }
+    }
+    
+    // Initialize on page load
+    updateScrollEffects();
+    
+    // Add scroll listener with throttling
+    window.addEventListener('scroll', requestScrollUpdate, { passive: true });
+    
+    // Add resize listener to recalculate on window resize
+    window.addEventListener('resize', updateScrollEffects, { passive: true });
+}

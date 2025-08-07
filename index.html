@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <link href="css/bootstrap-4.4.1.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <!-- Static Background Bubbles -->
@@ -23,49 +22,67 @@
 
     <!-- Header sec-->
     <header class="header">
-        <div class="container">
-            <div class="nav-content">
-                <div class="logo">
-                    <img src="https://i.ibb.co/1f4ZQH27/Untitled-design.png" alt="NSBM Volunteer Club Logo" width="100" height="100" class="logo-image">
-                </div>
-                
-                <nav class="nav-links">
-                    <a href="#about">About</a>
-                    <a href="#events">Events</a>
-                    <a href="#gallery">Gallery</a>
-                    <a href="#testimonials">Testimonials</a>
-                    <a href="#submit-testimonial" class="nav-cta-button">
-                        Contribute
+        <div class="container-fluid">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+                    <a class="navbar-brand" href="#hero">
+                        <img src="https://i.ibb.co/1f4ZQH27/Untitled-design.png" alt="NSBM Volunteer Club Logo" width="60" height="60" class="d-inline-block align-text-bottom">
                     </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#about">About<br></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#events">Events<br></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#gallery">Gallery<br></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#testimonials">Testimonials<br></a>
+                            </li>
+                        </ul>
+                        <form class="form-inline my-2 my-lg-0">
+                            <a href="#submit-testimonial" class="btn btn-outline-success my-2 my-sm-0 contribute-btn">Contribute</a>
+                        </form>
+                    </div>
                 </nav>
-
-                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
-                    <i class="fas fa-bars"></i>
-                </button>
             </div>
-
-            <nav class="mobile-nav" id="mobileNav">
-                <a href="#about" onclick="toggleMobileMenu()">About</a>
-                <a href="#events" onclick="toggleMobileMenu()">Events</a>
-                <a href="#gallery" onclick="toggleMobileMenu()">Gallery</a>
-                <a href="#testimonials" onclick="toggleMobileMenu()">Testimonials</a>
-                <a href="#submit-testimonial" class="nav-cta-button" onclick="toggleMobileMenu()">
-                    Contribute
-                </a>
-            </nav>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="hero">
+        <!-- Background Carousel -->
+        <div class="hero-carousel">
+            <div class="carousel-slide active">
+                <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Volunteers working together">
+            </div>
+            <div class="carousel-slide">
+                <img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Community service event">
+            </div>
+            <div class="carousel-slide">
+                <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Technology workshop">
+            </div>
+            <div class="carousel-slide">
+                <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Student volunteers">
+            </div>
+        </div>
+        <div class="hero-overlay"></div>
         <div class="container">
-            <h1 class="gradient-text floating-animation">WORK FOR A CAUSE. NOT FOR APPLAUSE</h1>
-            <p>We are the Volunteer Club. Together, we're building a better tomorrow through innovation and compassion.</p>
-            <div class="hero-buttons">
-                <a href="#contact" class="btn btn-primary">
-                    Contact Us <i class="fas fa-chevron-right"></i>
-                </a>
-                <a href="#about" class="btn btn-secondary">Learn More</a>
+            <div class="hero-content">
+                <h1 class="gradient-text floating-animation">WORK FOR A CAUSE. NOT FOR APPLAUSE</h1>
+                <p>We are the Volunteer Club. Together, we're building a better tomorrow through innovation and compassion.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">
+                        Contact Us <i class="fas fa-chevron-right"></i>
+                    </a>
+                    <a href="#about" class="btn btn-secondary">Learn More</a>
+                </div>
             </div>
         </div>
     </section>
@@ -74,9 +91,11 @@
     <section id="about" class="section slide-up">
         <div class="container">
             <h2 class="section-title gradient-text">About Us</h2>
-            <div class="glass-card-no-hover card slide-up">
-                <p class="mb-6">Founded in 2020, TechVolunteers is more than just a student organization—we're a movement. We bridge the gap between cutting-edge technology and meaningful community service, empowering students to create lasting positive impact.</p>
-                <p class="mb-8">Our diverse community of 200+ members includes students from Computer Science, Business, Communications, and beyond. Together, we tackle real-world challenges through innovative solutions and dedicated volunteer work.</p>
+            <div class="about-content slide-up">
+                <div class="about-description-card glass-card slide-up">
+                    <p class="about-description">Founded in 2020, the Volunteer Club is more than just a student organization—we're a movement. We bridge the gap between cutting-edge technology and meaningful community service, empowering students to create lasting positive impact.</p>
+                    <p class="about-description">Our diverse community of 200+ members includes students from Computer Science, Business, Communications, and beyond. Together, we tackle real-world challenges through innovative solutions and dedicated volunteer work.</p>
+                </div>
                 
                 <div class="stats">
                     <div class="stat slide-up">
@@ -241,7 +260,7 @@
 
     <section class="section" id="latest">
         <div class="container">
-            <h2 class="section-title gradient-text">Latest Events & Updates</h2>
+            <h2 class="section-title gradient-text">Recent Events & Updates</h2>
             <p class="section-subtitle">Stay updated with our latest achievements, events, and community impact stories</p>
             
             <div class="blog-filters">
@@ -250,7 +269,6 @@
                 <button class="filter-btn">Community</button>
                 <button class="filter-btn">Events</button>
                 <button class="filter-btn">Partnerships</button>
-                <button class="filter-btn">Member Spotlight</button>
             </div>
 
             <div class="grid grid-cols-3">
@@ -373,71 +391,71 @@
 
     
      <!-- Gallery Section -->
-    <section id="gallery" class="section slide-up" style="margin-top: 50px;">
-    <div class="container" style="text-align: center;">
-        <h2 class="section-title gradient-text" style="font-size: 40px; margin-bottom: 20px;">
+    <section id="gallery" class="section slide-up">
+    <div class="container">
+        <h2 class="section-title gradient-text">
             Gallery
         </h2>
-        <p class="section-subtitle" style="font-size: 18px; margin-bottom: 40px;">
+        <p class="section-subtitle">
             Moments that capture our journey and impact
         </p>
         
-        <div class="grid grid-cols-4" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+        <div class="grid grid-cols-4 gallery-grid">
             
             <div class="gallery-item slide-up" onclick="openModal('modal1')">
                 <div class="gallery-image">
-                    <img src="c:\Users\User\Downloads\WhatsApp Image 2025-07-17 at 08.33.42.jpeg" alt="Orientation Programme" style="width: 100%; border-radius: 10px;">
+                    <img src="c:\Users\User\Downloads\WhatsApp Image 2025-07-17 at 08.33.42.jpeg" alt="Orientation Programme" class="gallery-img">
                 </div>
-                <p class="caption" style="margin-top: 10px;">NSBM 25.2 ORIENTATION PROGRAMME 2025</p>
+                <p class="gallery-caption">NSBM 25.2 ORIENTATION PROGRAMME 2025</p>
             </div>
 
             <div class="gallery-item slide-up" onclick="openModal('modal2')"> 
                 <div class="gallery-image">
-                    <img src="c:\Users\User\Downloads\WhatsApp Image 2025-07-17 at 03.49.31.jpeg" alt="NSBM SIYAPATHSIYAUDANAYA2025" style="width: 100%; border-radius: 10px;">
+                    <img src="c:\Users\User\Downloads\WhatsApp Image 2025-07-17 at 03.49.31.jpeg" alt="NSBM SIYAPATHSIYAUDANAYA2025" class="gallery-img">
                 </div>
-                <p class="caption" style="margin-top: 10px;">NSBM SIYAPATH SIYA UDANAYA 2025</p>
+                <p class="gallery-caption">NSBM SIYAPATH SIYA UDANAYA 2025</p>
             </div>
 
             <div class="gallery-item slide-up" onclick="openModal('modal3')">
                 <div class="gallery-image">
-                    <img src="c:\Users\User\Downloads\WhatsApp Image 2025-07-17 at 03.53.24.jpeg" alt="SPORT FIESTA " style="width: 100%; border-radius: 10px;">
+                    <img src="c:\Users\User\Downloads\WhatsApp Image 2025-07-17 at 03.53.24.jpeg" alt="SPORT FIESTA " class="gallery-img">
                 </div>
-                <p class="caption" style="margin-top: 10px;">NSBM SPORT FIESTA 2025</p>
+                <p class="gallery-caption">NSBM SPORT FIESTA 2025</p>
             </div>
 
             <div class="gallery-item slide-up" onclick="openModal('modal4')">
                 <div class="gallery-image">
-                    <img src="c:\Users\User\Downloads\WhatsApp Image 2025-07-17 at 07.39.40.jpeg" alt="ICOBI 2024" style="width: 100%; border-radius: 10px;">
+                    <img src="c:\Users\User\Downloads\WhatsApp Image 2025-07-17 at 07.39.40.jpeg" alt="ICOBI 2024" class="gallery-img">
                 </div>
-                <p class="caption" style="margin-top: 10px;">ICOBI 2024</p>
+                <p class="gallery-caption">ICOBI 2024</p>
             </div>
 
             <div class="gallery-item slide-up" onclick="openModal('modal5')">
                 <div class="gallery-image">
-                    <img src="c:\Users\User\Downloads\WhatsApp Image 2025-07-17 at 08.36.00.jpeg" alt="NSBM COLOURS 2024" style="width: 100%; border-radius: 10px;">
+                    <img src="c:\Users\User\Downloads\WhatsApp Image 2025-07-17 at 08.36.00.jpeg" alt="NSBM COLOURS 2024" class="gallery-img">
                 </div>
-                <p class="caption" style="margin-top: 10px;">NSBM COLOURS 2024</p>
+                <p class="gallery-caption">NSBM COLOURS 2024</p>
             </div>
 
             <div class="gallery-item slide-up" onclick="openModal('modal6')">
                 <div class="gallery-image">
-                    <img src="c:\Users\User\Downloads\WhatsApp Image 2025-07-17 at 08.06.46.jpeg" alt="NSBM ICTAR 2024" style="width: 100%; border-radius: 10px;">
+                    <img src="c:\Users\User\Downloads\WhatsApp Image 2025-07-17 at 08.06.46.jpeg" alt="NSBM ICTAR 2024" class="gallery-img">
                 </div>
-                <p class="caption" style="margin-top: 10px;">NSBM ICTAR 2024</p>
+                <p class="gallery-caption">NSBM ICTAR 2024</p>
             </div>
 
             <div class="gallery-item slide-up" onclick="openModal('modal7')">
                 <div class="gallery-image">
-                    <img src="c:\Users\User\Downloads\WhatsApp Image 2025-07-17 at 08.31.38.jpeg" alt="SPIRITOUS 24'" style="width: 100%; border-radius: 10px;">
+                    <img src="c:\Users\User\Downloads\WhatsApp Image 2025-07-17 at 08.31.38.jpeg" alt="SPIRITOUS 24'" class="gallery-img">
                 </div>
-                <p class="caption" style="margin-top: 10px;">SPIRITOUS 24'</p>
+                <p class="gallery-caption">SPIRITOUS 24'</p>
             </div>
 
             <div class="gallery-item slide-up" onclick="openModal('modal8')">
                 <div class="gallery-image">
-                    <img src="c:\Users\User\Downloads\WhatsApp Image 2025-07-17 at 08.29.36.jpeg" alt="AGM'24" style="width: 100%; border-radius: 10px;">
+                    <img src="c:\Users\User\Downloads\WhatsApp Image 2025-07-17 at 08.29.36.jpeg" alt="AGM'24" class="gallery-img">
                 </div>
-                <p class="caption" style="margin-top: 10px;">AGM'24</p>
+                <p class="gallery-caption">AGM'24</p>
             </div>
 
         </div>
@@ -563,12 +581,12 @@
     </section>
 
     <!-- Submit Testimonial Section -->
-    <section id="submit-testimonial" class="section slide-up" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(59, 130, 246, 0.05)); padding: 6rem 0;">
+    <section id="submit-testimonial" class="section slide-up submit-testimonial-section">
         <div class="container">
             <h2 class="section-title gradient-text">Share Your Experience</h2>
             <p class="section-subtitle">Help others learn about our impact by sharing your testimonial. Your story matters and inspires us to do better!</p>
             
-            <div class="testimonial-submission-grid">
+            <div class="testimonial-submission-centered">
                 <div class="testimonial-form-container glass-card slide-up">
                     <div class="testimonial-form-header">
                         <i class="fas fa-star testimonial-form-icon"></i>
@@ -670,56 +688,6 @@
                         <p>Sorry, there was an error submitting your testimonial. Please try again or contact us directly.</p>
                     </div>
                 </div>
-                
-                <div class="testimonial-guidelines glass-card slide-up">
-                    <h3 class="guidelines-title">
-                        <i class="fas fa-lightbulb"></i>
-                        Testimonial Guidelines
-                    </h3>
-                    
-                    <div class="guideline-item">
-                        <i class="fas fa-check-circle guideline-icon"></i>
-                        <div>
-                            <h4>Be Specific</h4>
-                            <p>Share specific examples of how we helped you or your community</p>
-                        </div>
-                    </div>
-                    
-                    <div class="guideline-item">
-                        <i class="fas fa-heart guideline-icon"></i>
-                        <div>
-                            <h4>Be Authentic</h4>
-                            <p>Write in your own voice and share your genuine experience</p>
-                        </div>
-                    </div>
-                    
-                    <div class="guideline-item">
-                        <i class="fas fa-users guideline-icon"></i>
-                        <div>
-                            <h4>Include Impact</h4>
-                            <p>Mention how our work affected you, your organization, or community</p>
-                        </div>
-                    </div>
-                    
-                    <div class="guideline-item">
-                        <i class="fas fa-star guideline-icon"></i>
-                        <div>
-                            <h4>Keep it Positive</h4>
-                            <p>Focus on positive experiences and outcomes</p>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-examples">
-                        <h4><i class="fas fa-quote-left"></i> Example Topics</h4>
-                        <ul>
-                            <li>How our digital literacy workshops helped you</li>
-                            <li>Impact of our community service projects</li>
-                            <li>Your experience as a volunteer member</li>
-                            <li>Collaboration outcomes with your organization</li>
-                            <li>Personal growth through our programs</li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -730,8 +698,8 @@
             <h2 class="section-title gradient-text">Get In Touch</h2>
             <p class="section-subtitle">Ready to join our mission? We'd love to hear from you</p>
             
-            <div style="display: flex; justify-content: center; width: 100%;">
-                <div class="contact-form glass-card slide-up" style="max-width: 600px; width: 100%;">
+            <div class="contact-form-wrapper">
+                <div class="contact-form glass-card slide-up">
                     <h3 class="mb-6">Send us a Message</h3>
                     <form id="contactForm" action="https://formspree.io/f/mgvzwywa" method="POST">
                         <div class="form-group">
@@ -744,7 +712,8 @@
                             <input type="tel" name="phone" class="form-input" placeholder="Your Phone (Optional)">
                         </div>
                         <div class="form-group">
-                            <select name="inquiry_type" class="form-input" required>
+                            <label for="inquiry-type" class="form-label">Inquiry Type *</label>
+                            <select id="inquiry-type" name="inquiry_type" class="form-input" required>
                                 <option value="" disabled selected>Select Inquiry Type</option>
                                 <option value="membership">Membership Inquiry</option>
                                 <option value="volunteer">Volunteer Opportunity</option>
@@ -761,18 +730,18 @@
                         <input type="hidden" name="_next" value="thank-you.html">
                         <input type="hidden" name="_captcha" value="false">
                         
-                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.8rem 1.5rem; font-size: 1rem;" id="submitBtn">
+                        <button type="submit" class="btn btn-primary contact-submit-btn" id="submitBtn">
                             <span id="submitText">Send Message</span>
                             <span id="loadingText" class="hidden">Sending...</span>
                         </button>
                     </form>
                     
                     <!-- Success/Error Messages -->
-                    <div id="formSuccess" class="hidden" style="margin-top: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; border-radius: 8px; color: #059669;">
+                    <div id="formSuccess" class="hidden form-success-message">
                         <i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully. We'll get back to you soon.
                     </div>
                     
-                    <div id="formError" class="hidden" style="margin-top: 1rem; padding: 1rem; background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; border-radius: 8px; color: #dc2626;">
+                    <div id="formError" class="hidden form-error-message">
                         <i class="fas fa-exclamation-circle"></i> Sorry, there was an error sending your message. Please try again or contact us directly.
                     </div>
                 </div>
@@ -808,13 +777,13 @@
                     <h4>Follow Us</h4>
                     <div class="social-links">
                         <a href="#" class="social-link">
-                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook" style="filter: invert(0);">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook" class="social-icon">
                         </a>
                         <a href="#" class="social-link">
-                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" style="filter: invert(0);">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" class="social-icon">
                         </a>
                         <a href="#" class="social-link">
-                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" style="filter: invert(0);">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" class="social-icon">
                         </a>
                     </div>
                 </div>
