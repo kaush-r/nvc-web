@@ -834,6 +834,7 @@ function initializeLandingPageTransitions() {
     const heroOverlay = document.querySelector('.hero-overlay');
     const heroCarousel = document.querySelector('.hero-carousel');
     const header = document.querySelector('.header');
+    const navbar = document.querySelector('.navbar');
     
     if (!hero || !heroContent) return;
     
@@ -861,6 +862,16 @@ function initializeLandingPageTransitions() {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
+            }
+        }
+        
+        // Navbar color transition
+        if (navbar) {
+            // Change navbar background color when user scrolls past hero section
+            if (scrolled >= heroHeight * 0.8) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
             }
         }
         
@@ -898,4 +909,7 @@ function initializeLandingPageTransitions() {
     
     // Add resize listener to recalculate on window resize
     window.addEventListener('resize', updateScrollEffects, { passive: true });
+    
+    // Check on document ready to make sure everything's applied correctly
+    document.addEventListener('DOMContentLoaded', updateScrollEffects, { passive: true });
 }

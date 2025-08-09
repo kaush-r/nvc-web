@@ -5,6 +5,21 @@
     font-family: 'Inter', sans-serif;
 }
 
+/* Ensure navbar transparency - High specificity to override other styles */
+.navbar:not(.navbar-scrolled),
+nav.navbar:not(.navbar-scrolled),
+.navbar.navbar-expand-lg:not(.navbar-scrolled),
+.navbar.navbar-dark:not(.navbar-scrolled),
+header:not(.scrolled),
+header.sticky-top:not(.scrolled),
+.sticky-top:not(.scrolled) {
+    background: transparent !important;
+    background-color: transparent !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+}
+
 html {
     margin: 0;
     padding: 0;
@@ -263,12 +278,171 @@ body {
     z-index: 1000;
     padding: 15px 0;
     background: none;
-    -webkit-backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
     border-bottom: none;
     width: 100%;
+    transition: all 0.3s ease;
+}
+
+/* Modern Header / Navbar improvements */
+header, 
+header.sticky-top,
+nav.navbar .container {
+    background: transparent !important;
+    background-color: transparent !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+}
+
+.sticky-top {
+    position: fixed !important;
+    top: 0;
+    z-index: 1020;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.navbar,
+.navbar.navbar-expand-lg,
+.navbar.navbar-dark {
+    padding: 0.7rem 0;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none;
+    transition: all 0.3s ease;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+}
+
+.navbar-dark {
+    background-color: transparent;
+}
+
+/* This class will be added via JavaScript when scrolling */
+.navbar-scrolled {
+    background-color: white !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Change text color when navbar is scrolled */
+.navbar-scrolled .nav-link {
+    color: #1f2937 !important;
+}
+
+.navbar-scrolled .nav-link:hover {
+    color: #16a34a !important;
+}
+
+.navbar-scrolled .navbar-brand {
+    color: #1f2937 !important;
+}
+
+.navbar-scrolled .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(31, 41, 55, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: #e6eef8 !important;
+    font-weight: bold;
+}
+
+.navbar-brand img {
+    border-radius: 8px;
+}
+
+.navbar-brand:hover {
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.nav-link {
+    color: #e6eef8 !important;
+    padding: 0.6rem 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #fff !important;
+}
+
+.navbar-toggler {
+    border: 0;
+    padding: 0.25rem 0.5rem;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.btn-sm {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+.btn-outline-success {
+    color: #16a34a;
+    border-color: rgba(255, 255, 255, 0.08);
+    background-color: transparent;
+}
+
+.btn-outline-success:hover {
+    color: #fff;
+    background-color: #16a34a;
+    border-color: #16a34a;
+}
+
+.btn-primary {
+    background-color: #16a34a;
+    border-color: #16a34a;
+}
+
+.btn-primary:hover {
+    background-color: #15803d;
+    border-color: #15803d;
+}
+
+.me-2 {
+    margin-right: 0.5rem !important;
+}
+
+.ms-1 {
+    margin-left: 0.25rem !important;
+}
+
+.gap-2 {
+    gap: 0.5rem !important;
+}
+
+.fw-bold {
+    font-weight: bold !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.align-items-center {
+    align-items: center !important;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem !important;
+}
+
+.mb-lg-0 {
+    margin-bottom: 0 !important;
+}
+
+@media (min-width: 992px) {
+    .mb-lg-0 {
+        margin-bottom: 0 !important;
+    }
 }
 
 .container {
@@ -497,8 +671,6 @@ body {
     }
     .header{
         padding: 10px 0;
-        -webkit-backdrop-filter: blur(8px);
-        backdrop-filter: blur(8px);
     }
     .nav-links a{
         font-size: 10px;
@@ -780,7 +952,20 @@ body {
     .navbar-collapse {
         margin-top: 1rem;
         padding-top: 1rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        background: transparent !important;
+        background-color: transparent !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .navbar-scrolled .navbar-collapse {
+        background: white;
         border-top: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
     }
     
     .navbar-nav {
@@ -824,83 +1009,159 @@ body {
     padding-right: 0;
 }
 
-/* Hero Section */
+/* Hero Section - Modern Dark Theme */
 .hero {
+    position: relative;
+    padding: 0;
+    margin: 0;
     min-height: 100vh;
+    height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 8rem 0;
-    position: relative;
     overflow: hidden;
 }
 
-/* Hero Carousel */
+/* Hero Carousel - Simplified */
 .hero-carousel {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
 }
 
-.carousel-slide {
+.hero-carousel img {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 2s ease-in-out;
-    visibility: hidden;
-}
-
-.carousel-slide.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.carousel-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
-    transform: scale(1.02);
-    transition: transform 10s ease-out;
+    filter: grayscale(0.05) brightness(0.5);
+    opacity: 0;
+    transition: opacity 1s ease;
 }
 
-.carousel-slide.active img {
-    transform: scale(1.08);
+.hero-carousel img.active {
+    opacity: 1;
 }
 
-/* Hero Overlay */
+/* Hero Overlay - Dark gradient */
 .hero-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, 
-        rgba(236, 254, 255, 0.35) 0%, 
-        rgba(224, 242, 254, 0.30) 25%, 
-        rgba(220, 252, 231, 0.35) 50%, 
-        rgba(191, 219, 254, 0.30) 75%, 
-        rgba(240, 253, 250, 0.35) 100%);
-    z-index: -1;
-    backdrop-filter: blur(0.5px);
+    inset: 0;
+    background: linear-gradient(180deg, rgba(3, 7, 18, 0.3), rgba(2, 6, 12, 0.6));
+    z-index: 1;
 }
 
-.hero .container {
+.hero-content {
     position: relative;
     z-index: 2;
+    padding: 0 1rem;
+    text-align: center;
+    color: #e6eef8;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.hero h1 {
-    font-size: clamp(1.6rem, 6vw, 3rem);
-    font-weight: bold;
+.hero-content h1 {
+    font-size: 3rem;
     margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.hero-content .lead {
+    font-size: 1.25rem;
+    color: #94a3b8;
+    margin-bottom: 2rem;
+}
+
+.hero-content p {
+    color: #94a3b8;
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.hero-content .btn {
+    margin: 0.25rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+}
+
+.btn-outline-light {
+    color: #e6eef8;
+    border-color: rgba(255, 255, 255, 0.3);
+    background-color: transparent;
+}
+
+.btn-outline-light:hover {
+    color: #000;
+    background-color: #e6eef8;
+    border-color: #e6eef8;
+}
+
+.mt-3 {
+    margin-top: 1rem !important;
+}
+
+/* Floating animation enhancement */
+.floating-animation {
+    display: inline-block;
+    transform-origin: center;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+    .hero {
+        min-height: 100vh;
+    }
+    
+    .hero-content {
+        padding: 5rem 1rem 3rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .hero {
+        min-height: 100vh;
+    }
+    
+    .hero-content {
+        padding: 4rem 1rem 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-content .lead,
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+    
+    .hero-content .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
     line-height: 1.1;
 }
 
@@ -1016,12 +1277,7 @@ body {
 }
 
 .header.scrolled {
-    background: rgba(255, 255, 255, 0.95);
-    -webkit-backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.98);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
